@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="App">
+<head>
+  <meta charset="UTF-8">
+  <title>form</title>
+  <link rel="stylesheet" href="../../js/lib/bootstrap/dist/css/bootstrap.min.css">
+  <style>
+    .container {
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body ng-controller="MyCtrl">
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <form class="form-horizontal" role="form">
+          <div class="form-group">
+            <div class="col-sm-2">honors</div>
+            <div class="col-sm-8">
+              <!-- 从默认数据 model.setting.honors 里面读值 -->
+              <div ng-repeat="honor in model.setting.honors"
+                   class="checkbox">
+                <label>
+                  <!-- 被选中的复选框的值(boolean)会直接赋给 model.postData.honors -->
+                  <input ng-model="model.postData.honors[$index].value"
+                         ng-checked="model.postData.honors[$index].value"
+                         ng-value="honor.value"
+                         type="checkbox">{{ honor.name }}
+                </label>
+              </div>
+              <p class="small">{{ model.postData.honors }}</p>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="../../js/lib/jquery/dist/jquery.min.js"></script>
+  <script src="../../js/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="../../js/lib/angular-v1.4.8/angular.min.js"></script>
+  <script>
+    var app = angular.module('App', []);
+
+    app
+      .controller('MyCtrl', function($scope){
+        var vm = $scope;
+
+        vm.model = {
+          setting: {
+            honors: [
+              {
+                name: 'AllStar',
+                value: 0
+              },{
+                name: 'Champion',
+                value: 1
+              },{
+                name: 'FMVP',
+                value: 2
+              }
+            ]
+          },
+          postData: {
+            // honors: null,
+            honors: [
+              {value: false},
+              {value: true},
+              {value: true}
+            ]
+          }
+        };
+      });
+  </script>
+
+</body>
+</html>

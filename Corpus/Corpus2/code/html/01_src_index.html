@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Hello World!</title>
+
+        <script src="lib/js/angular.min.js"></script>
+        <script src="lib/js/angular-route.min.js"></script>
+        <script src="lib/js/angular-animate.min.js"></script>
+        <script src="lib/js/angular-aria.min.js"></script>
+        <script src="lib/js/angular-touch.min.js"></script>
+        <script src="lib/js/angular-material.min.js"></script>
+        <script src="lib/js/angular-local-storage.min.js"></script>
+
+        <link rel="stylesheet" href="lib/css/angular-material.min.css">
+        <link rel="stylesheet" href="lib/css/font-awesome.min.css">
+
+        <link rel="stylesheet" href="lib/css/app.css">
+        <link rel="stylesheet" href="lib/css/animation.css">
+        <link rel="stylesheet" href="lib/css/material-custom.css">
+    </head>
+    <body ng-app="azure" md-theme="default">
+        <div ng-include="'app/layout/shell.html'" class="page-container"></div>
+
+        <script src="app/app.js"></script>
+
+        <script src="app/common/app-start.service.js"></script>
+        <script src="app/common/routes.constant.js"></script>
+
+        <script src="app/common/service.module.js"></script>
+
+        <script src="app/layout/shell.js"></script>
+
+        <script src="app/home/home.js"></script>
+        <script src="app/blob/blob.js"></script>
+        <script src="app/layout/account-storage.service.js"></script>
+
+        <!--We are using io.js <script>document.write(process.version)</script>-->
+        <!--and Electron <script>document.write(process.versions['electron'])</script>.-->
+    </body>
+</html>
