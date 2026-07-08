@@ -1,0 +1,70 @@
+{
+  // Model params
+  "model_scope": "cn_chatbot", // Allow multiple models be loaded into one graph at inference time
+  "initializer_gain": 1.0, // Used in trainable variable initialization.
+  "vocab_size": 12032, // Number of tokens defined in the vocabulary file.
+  "embedding_size": 1024, // Model dimension in the hidden layers.
+  "num_layers": 24, // Number of layers in the decoder stack.
+  "num_heads": 16, // Number of heads to use in multi-headed attention.
+  "filter_size": 4096, // Inner layer dimension in the feed-forward network.
+
+  // Training data repeating params
+  "aug1_repeat_times": 2, // 2 2
+  "aug2_repeat_times": 2, // 2 3
+
+  // Training input params
+  "batch_token_size": 4800, // Maximum number of tokens per batch of training examples. (6000 when fine tune)
+  // "batch_token_size": 24000,
+  "max_seq_len": 720, // Maximum number of tokens in the training pair, plus two special tokens.
+
+  // Training optimizer params
+  "optimizer_adam_beta1": 0.9,
+  "optimizer_adam_beta2": 0.997,
+  "optimizer_adam_epsilon": 1e-09,
+
+  // Training dropout params
+  "layer_postprocess_dropout": 0.1,
+  "attention_dropout": 0.1,
+  "relu_dropout": 0.1,
+
+  // Other training params
+  "label_smoothing": 0.1,
+  "learning_rate": 6.6,
+  "learning_rate_decay_rate": 1.0,
+  "learning_rate_warmup_steps": 25800,
+  "num_epochs": 24,
+  "steps_per_epoch": 12917, // 12917, (22, 647), (22, 647), cnt = 2631272 (4 GPUs)
+  "num_epochs_fine_tune": 28,
+  "steps_per_epoch_fine_tune": 860, // 860, (4, 674), (4, 674), cnt = 73686 (2 GPUs)
+  "summary_per_steps": 100,
+  "num_gpus": 2, // 4, 8
+  "num_gpus_pre_train": 4, // only used for learning rate calculation in finetunetrainer.py
+
+  // Valid options: "hierarchical_copy", "reduce_to_cpu0", "reduce_to_gpu0".
+  // Only used when num_gpus >= 2.
+  "reduce_approach": "reduce_to_cpu0",
+
+  // Default prediction params
+  "batch_size_infer": 1,
+  "src_max_len_infer": 240, // Maximum number of tokens in the prediction input. This is for the model input.
+  "sum_max_len_infer": 400, // Maximum number of tokens in the summary input. This is for summarize the context.
+  "temperature": 0.1,
+  "top_k": 0,
+  "top_p": 0.92,
+  "default_tz": "Asia/Shanghai", // the default timezone used when no area is specified
+  "default_tz_area": "北京",
+  "system_tz": "Asia/Shanghai",
+  // "system_tz": "America/New_York", // the timezone of the server running this application
+
+  // Special reserved tokens. Make sure they match those in vocab.txt.
+  "pad_id": 0,
+  "pad_token": "_pad_",
+  "unk_id": 1,
+  "unk_token": "_unk_",
+  "sos_id": 2,
+  "sos_token": "_sos_",
+  "qas_id": 3,
+  "qas_token": "_qas_",
+  "eos_id": 4,
+  "eos_token": "_eos_"
+}

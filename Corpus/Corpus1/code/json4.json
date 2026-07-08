@@ -1,0 +1,2675 @@
+{
+  "openapi": "3.0.4",
+  "info": {
+    "title": "Service Bus API Gateway - Common Subsystem Contracts",
+    "description": "Assembly version: 10.0.0.0",
+    "version": "10.0.0.0"
+  },
+  "servers": [
+    {
+      "url": "/servicebusgateway"
+    }
+  ],
+  "paths": {
+    "/Common/AddEquipmentGroup": {
+      "post": {
+        "tags": [
+          "Common"
+        ],
+        "summary": "A request sent to add a new device group to the system.",
+        "requestBody": {
+          "description": "The request.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Contracts.Common.Requests.AddEquipmentGroupReq"
+              }
+            }
+          }
+        },
+        "responses": {
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Contracts.Common.Responses.AddEquipmentGroupResp"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Common/CopyEquipmentGroup": {
+      "post": {
+        "tags": [
+          "Common"
+        ],
+        "summary": "The request to copy an existing equipment group to a new group name.",
+        "requestBody": {
+          "description": "The request.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Contracts.Common.Requests.CopyEquipmentGroupReq"
+              }
+            }
+          }
+        },
+        "responses": {
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Contracts.Common.Responses.CopyEquipmentGroupResp"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Common/DeleteEquipmentGroup": {
+      "post": {
+        "tags": [
+          "Common"
+        ],
+        "summary": "A request to delete a equipment group from the system.",
+        "requestBody": {
+          "description": "The request.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Contracts.Common.Requests.DeleteEquipmentGroupReq"
+              }
+            }
+          }
+        },
+        "responses": {
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Contracts.Common.Responses.DeleteEquipmentGroupResp"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Common/GetItemName": {
+      "post": {
+        "tags": [
+          "Common"
+        ],
+        "summary": "A request sent to retrieve an item's name.",
+        "requestBody": {
+          "description": "The request.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Contracts.Common.Requests.GetItemNameReq"
+              }
+            }
+          }
+        },
+        "responses": {
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Contracts.Common.Responses.GetItemNameResp"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Common/ModifyEquipmentGroup": {
+      "post": {
+        "tags": [
+          "Common"
+        ],
+        "summary": "A request to modify the devices contained in an equipment group.",
+        "requestBody": {
+          "description": "The request.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Contracts.Common.Requests.ModifyEquipmentGroupReq"
+              }
+            }
+          }
+        },
+        "responses": {
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Contracts.Common.Responses.ModifyEquipmentGroupResp"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Common/SendPlatformComponentHeartbeat": {
+      "post": {
+        "tags": [
+          "Common"
+        ],
+        "summary": "Sends the platform component heartbeat.",
+        "requestBody": {
+          "description": "The request.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Contracts.Common.Objects.PlatformComponentHeartbeat"
+              }
+            }
+          }
+        },
+        "responses": {
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/Common/SendUserSessionHeartbeat": {
+      "post": {
+        "tags": [
+          "Common"
+        ],
+        "summary": "Sends the user session heartbeat.",
+        "requestBody": {
+          "description": "The request.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Contracts.Common.Objects.UserSessionHeartbeat"
+              }
+            }
+          }
+        },
+        "responses": {
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/Common/SetDeviceLinkingInfo": {
+      "post": {
+        "tags": [
+          "Common"
+        ],
+        "summary": "Comment describing your root element",
+        "requestBody": {
+          "description": "The request.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Contracts.Common.Requests.SetDeviceLinkingInfoReq"
+              }
+            }
+          }
+        },
+        "responses": {
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Contracts.Common.Responses.SetDeviceLinkingInfoResp"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Common/SetOpStatus": {
+      "post": {
+        "tags": [
+          "Common"
+        ],
+        "summary": "The SetOpStatusReq.",
+        "requestBody": {
+          "description": "The request.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Contracts.Common.Requests.SetOpStatusReq"
+              }
+            }
+          }
+        },
+        "responses": {
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Contracts.Common.Responses.SetOpStatusResp"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Contracts.Common.Messages.ClientDisconnectMsg": {
+        "type": "object",
+        "properties": {
+          "contractMetadata": {
+            "$ref": "#/components/schemas/Contracts.Core.ContractMetadata"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Message broadcasting that a client has disconnected."
+      },
+      "Contracts.Common.Messages.DeviceStatusUpdateMsg": {
+        "type": "object",
+        "properties": {
+          "contractMetadata": {
+            "$ref": "#/components/schemas/Contracts.Core.ContractMetadata"
+          },
+          "id": {
+            "$ref": "#/components/schemas/Contracts.Common.Objects.Id"
+          },
+          "modifiedBy": {
+            "type": "string",
+            "description": "The ModifiedBy."
+          },
+          "opStatus": {
+            "$ref": "#/components/schemas/Contracts.Common.Objects.OpStatus"
+          },
+          "reason": {
+            "type": "string",
+            "description": "The Reason."
+          },
+          "timestamp": {
+            "type": "string",
+            "description": "The date/time that action occurred.",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Message sent as notification when the status of the device changes from online to offline or offiline to online.  A string containing the reason for the state change is included.."
+      },
+      "Contracts.Common.Messages.LogOutUserMsg": {
+        "type": "object",
+        "properties": {
+          "contractMetadata": {
+            "$ref": "#/components/schemas/Contracts.Core.ContractMetadata"
+          },
+          "reason": {
+            "type": "string",
+            "description": "The Reason."
+          },
+          "user": {
+            "type": "string",
+            "description": "The user who performed action."
+          }
+        },
+        "additionalProperties": false,
+        "description": "The LogOutUserMsg."
+      },
+      "Contracts.Common.Messages.NotificationLevel": {
+        "enum": [
+          "Error",
+          "Warning",
+          "Info"
+        ],
+        "type": "string",
+        "description": "The NotificationLevel."
+      },
+      "Contracts.Common.Messages.ServiceStateChangedMsg": {
+        "type": "object",
+        "properties": {
+          "instanceId": {
+            "type": "string",
+            "description": "The instance identifier."
+          },
+          "observedAtUtc": {
+            "type": "string",
+            "description": "The observed at UTC.",
+            "format": "date-time"
+          },
+          "reason": {
+            "type": "string",
+            "description": "The reason.\r\n\"HeartbeatSeen\" | \"Timeout\" | \"Tombstone\" | \"Shutdown\""
+          },
+          "service": {
+            "type": "string",
+            "description": "The service."
+          },
+          "startedAtUtc": {
+            "type": "string",
+            "description": "The started at UTC.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "state": {
+            "type": "string",
+            "description": "The state.\r\n\"Up\" | \"Down\" | \"Stopping\""
+          }
+        },
+        "additionalProperties": false,
+        "description": "Class ServiceStateChanged."
+      },
+      "Contracts.Common.Messages.SubsystemUserUpdateMsg": {
+        "type": "object",
+        "properties": {
+          "contractMetadata": {
+            "$ref": "#/components/schemas/Contracts.Core.ContractMetadata"
+          },
+          "users": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The Users."
+          }
+        },
+        "additionalProperties": false,
+        "description": "Message indicating which users are connected to the subsystem."
+      },
+      "Contracts.Common.Messages.UserNotificationMsg": {
+        "type": "object",
+        "properties": {
+          "associatedId": {
+            "$ref": "#/components/schemas/Contracts.Common.Objects.IdWrapper"
+          },
+          "classification": {
+            "$ref": "#/components/schemas/Contracts.Common.Objects.NotificationClassification"
+          },
+          "contractMetadata": {
+            "$ref": "#/components/schemas/Contracts.Core.ContractMetadata"
+          },
+          "level": {
+            "$ref": "#/components/schemas/Contracts.Common.Messages.NotificationLevel"
+          },
+          "msgText": {
+            "type": "string",
+            "description": "The MsgText."
+          },
+          "popup": {
+            "type": "boolean",
+            "description": "The Popup."
+          }
+        },
+        "additionalProperties": false,
+        "description": "Message sent as notification of a condition which is to be brought to the user's attention.  A string containing the text of a message is included.."
+      },
+      "Contracts.Common.Messages.UserUpdateMsg": {
+        "type": "object",
+        "properties": {
+          "contractMetadata": {
+            "$ref": "#/components/schemas/Contracts.Core.ContractMetadata"
+          },
+          "user": {
+            "$ref": "#/components/schemas/Contracts.Common.Objects.GenericUser"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Message broadcasting that a user has been updated."
+      },
+      "Contracts.Common.Objects.AbstractDeviceAddress": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "The AbstractDeviceAddress."
+      },
+      "Contracts.Common.Objects.AbstractDeviceProtocol": {
+        "type": "object",
+        "properties": {
+          "connectionType": {
+            "type": "string",
+            "description": "The connection type."
+          }
+        },
+        "additionalProperties": false,
+        "description": "The AbstractDeviceProtocol."
+      },
+      "Contracts.Common.Objects.AlertType": {
+        "enum": [
+          "WrongWay",
+          "Generic",
+          "RemoteEvent",
+          "Award",
+          "PumpStation",
+          "RemoteLink",
+          "DeviceStatus",
+          "ProcessStatus",
+          "Vsl"
+        ],
+        "type": "string",
+        "description": "The AlertType."
+      },
+      "Contracts.Common.Objects.BaudRate": {
+        "enum": [
+          "Br300",
+          "Br1200",
+          "Br2400",
+          "Br4800",
+          "Br9600",
+          "Br14400",
+          "Br19200",
+          "Br28800"
+        ],
+        "type": "string",
+        "description": "The BaudRate."
+      },
+      "Contracts.Common.Objects.CeasedUseItem": {
+        "type": "object",
+        "properties": {
+          "additionalData": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": { }
+            },
+            "description": "The AdditionalData."
+          },
+          "associatedIds": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Contracts.Common.Objects.Id"
+            },
+            "description": "The AssociatedIds."
+          },
+          "ceasedDate": {
+            "type": "string",
+            "description": "The CeasedDate.",
+            "format": "date-time"
+          },
+          "id": {
+            "$ref": "#/components/schemas/Contracts.Common.Objects.Id"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the corridor for display purposes."
+          }
+        },
+        "additionalProperties": false,
+        "description": "Represents a ceased use item."
+      },
+      "Contracts.Common.Objects.CeasedUseItem`1": {
+        "type": "object",
+        "properties": {
+          "additionalData": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": { }
+            },
+            "description": "The AdditionalData."
+          },
+          "associatedIds": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Contracts.Common.Objects.Id"
+            },
+            "description": "The AssociatedIds."
+          },
+          "ceasedDate": {
+            "type": "string",
+            "description": "The CeasedDate.",
+            "format": "date-time"
+          },
+          "id": {
+            "$ref": "#/components/schemas/Contracts.Common.Objects.Id"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the corridor for display purposes."
+          }
+        },
+        "additionalProperties": false,
+        "description": "Represents a ceased use item."
+      },
+      "Contracts.Common.Objects.ChildNode": {
+        "type": "object",
+        "properties": {
+          "distance": {
+            "type": "number",
+            "description": "The Distance.",
+            "format": "double"
+          },
+          "id": {
+            "$ref": "#/components/schemas/Contracts.Common.Objects.Id"
+          },
+          "virtual": {
+            "type": "boolean",
+            "description": "This flag indicates whether the given node is virtual.  Virtual nodes are conceptual branching points with no real equipment.  Non-virtual nodes represent real, physical devices."
+          }
+        },
+        "additionalProperties": false,
+        "description": "The ChildNode."
+      },
+      "Contracts.Common.Objects.CommAddress": {
+        "type": "object",
+        "properties": {
+          "addressValue": {
+            "$ref": "#/components/schemas/Contracts.Common.Objects.AbstractDeviceAddress"
+          }
+        },
+        "additionalProperties": false,
+        "description": "This is non-NTCIP (generic) device address."
+      },
+      "Contracts.Common.Objects.CommunityType": {
+        "enum": [
+          "Community",
+          "ReadWriteCommunity"
+        ],
+        "type": "string",
+        "description": "The CommunityType."
+      },
+      "Contracts.Common.Objects.Corridor": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "direction": {
+            "maxLength": 128,
+            "minLength": 0,
+            "type": "string",
+            "description": "The name of the direction of the roadway."
+          },
+          "endMileMarker": {
+            "maximum": 9999.99,
+            "minimum": 0,
+            "type": "number",
+            "description": "The maximum mile marker value to describe the extent of this corridor.",
+            "format": "double"
+          },
+          "id": {
+            "$ref": "#/components/schemas/Contracts.Common.Objects.Id"
+          },
+          "name": {
+            "maxLength": 200,
+            "minLength": 0,
+            "type": "string",
+            "description": "The name of the corridor for display purposes."
+          },
+          "roadway": {
+            "maxLength": 200,
+            "minLength": 0,
+            "type": "string",
+            "description": "The name of the roadway."
+          },
+          "startMileMarker": {
+            "maximum": 9999.99,
+            "minimum": 0,
+            "type": "number",
+            "description": "The minimum mile marker value to describe the extent of this corridor.",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Contains data representing a corridor."
+      },
+      "Contracts.Common.Objects.CrossStreetProximity": {
+        "enum": [
+          "At",
+          "Before",
+          "After"
+        ],
+        "type": "string",
+        "description": "The CrossStreetProximity."
+      },
+      "Contracts.Common.Objects.DeviceComm": {
+        "type": "object",
+        "properties": {
+          "deviceAddress": {
+            "$ref": "#/components/schemas/Contracts.Common.Objects.AbstractDeviceAddress"
+          },
+          "deviceProtocol": {
+            "$ref": "#/components/schemas/Contracts.Common.Objects.AbstractDeviceProtocol"
+          },
+          "driverName": {
+            "type": "string",
+            "description": "The driver name the device would be communicating with"
+          },
+          "pollCycle": {
+            "type": "integer",
+            "description": "The interval in minutes to poll the controller",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "The communication representation of the device"
+      },
+      "Contracts.Common.Objects.DeviceLinkingData": {
+        "type": "object",
+        "properties": {
+          "deviceLinkingInfo": {
+            "$ref": "#/components/schemas/Contracts.Common.Objects.DeviceLinkingInfo"
+          }
+        },
+        "additionalProperties": false,
+        "description": "The DeviceLinkingData."
+      },
+      "Contracts.Common.Objects.DeviceLinkingInfo": {
+        "type": "object",
+        "properties": {
+          "parentNodes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Contracts.Common.Objects.ParentNode"
+            },
+            "description": "The ParentNodes."
+          }
+        },
+        "additionalProperties": false,
+        "description": "Root element for a file describing which devices are upstream from one another"
+      },
+      "Contracts.Common.Objects.DeviceLinkingNode": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Contracts.Common.Objects.Id"
+          },
+          "virtual": {
+            "type": "boolean",
+            "description": "This flag indicates whether the given node is virtual.  Virtual nodes are conceptual branching points with no real equipment.  Non-virtual nodes represent real, physical devices."
+          }
+        },
+        "additionalProperties": false,
+        "description": "Description of a node used in the device map"
+      },
+      "Contracts.Common.Objects.DeviceMsg": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "The DeviceMsg."
+      },
+      "Contracts.Common.Objects.DeviceMsgChoice": {
+        "enum": [
+          "HarMsg",
+          "MultiMsg",
+          "BeaconMsg",
+          "LcsMsg"
+        ],
+        "type": "string",
+        "description": "The DeviceMsgChoice."
+      },
+      "Contracts.Common.Objects.DeviceStatus": {
+        "type": "object",
+        "properties": {
+          "lastCommAttempt": {
+            "type": "string",
+            "description": "The lastest datetime in which an attempt was made to communicate with the device",
+            "format": "date-time",
+            "nullable": true
+          },
+          "lastControl": {
+            "type": "string",
+            "description": "The lastest datetime in which there was communication with the device",
+            "format": "date-time",
+            "nullable": true
+          },
+          "lastSuccessfulPoll": {
+            "type": "string",
+            "description": "The lastest datetime in which the device was polled",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "The is the base device status type"
+      },
+      "Contracts.Common.Objects.DialupAddress": {
+        "type": "object",
+        "properties": {
+          "address": {
+            "maximum": 65535,
+            "minimum": 1,
+            "type": "integer",
+            "description": "The drop address of the equipment.",
+            "format": "int32"
+          },
+          "baudRate": {
+            "$ref": "#/components/schemas/Contracts.Common.Objects.BaudRate"
+          },
+          "phoneNumber": {
+            "type": "string",
+            "description": "Phone number to dial this equipment (e.g. \"555-5555\" or \"1-555-555-5555\" for long distance.  Note: The dashes are optional)"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Dialup Address"
+      },
+      "Contracts.Common.Objects.DirectAddress": {
+        "type": "object",
+        "properties": {
+          "address": {
+            "maximum": 65535,
+            "minimum": 1,
+            "type": "integer",
+            "description": "The drop address of the equipment.",
+            "format": "int32"
+          },
+          "baudRate": {
+            "$ref": "#/components/schemas/Contracts.Common.Objects.BaudRate"
+          },
+          "comPort": {
+            "pattern": "^COM\\d\\d?$",
+            "type": "string",
+            "description": "Local communications port that this sign is connected to (e.g. COM1)"
+          },
+          "dataBits": {
+            "maximum": 8,
+            "minimum": 7,
+            "type": "integer",
+            "description": "Number of data bits that this address uses",
+            "format": "int32"
+          },
+          "parity": {
+            "$ref": "#/components/schemas/Contracts.Common.Objects.Parity"
+          },
+          "stopBits": {
+            "maximum": 2,
+            "minimum": 1,
+            "type": "integer",
+            "description": "Number of stop bits that this address uses",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Direct Address"
+      },
+      "Contracts.Common.Objects.Direction": {
+        "enum": [
+          "North",
+          "South",
+          "West",
+          "East",
+          "Unknown"
+        ],
+        "type": "string",
+        "description": "The Direction."
+      },
+      "Contracts.Common.Objects.Driver": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the corridor for display purposes."
+          },
+          "protocols": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The protocols supported by this driver."
+          }
+        },
+        "additionalProperties": false,
+        "description": "The Driver."
+      },
+      "Contracts.Common.Objects.Equipment": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "The Equipment."
+      },
+      "Contracts.Common.Objects.EquipmentGroup": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Contracts.Common.Objects.Id"
+          },
+          "ids": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Contracts.Common.Objects.Id"
+            },
+            "description": "The Ids."
+          },
+          "name": {
+            "maxLength": 30,
+            "minLength": 0,
+            "type": "string",
+            "description": "The name of the corridor for display purposes."
+          }
+        },
+        "additionalProperties": false,
+        "description": "An equipment group is a logical grouping of equipment.  They can be organized by roadway, type of protocol, or any other grouping desired. The equipment identifiers that belong to this group.  A group can have zero pieces of equipment in it."
+      },
+      "Contracts.Common.Objects.EquipmentLocation": {
+        "required": [
+          "direction",
+          "roadway"
+        ],
+        "type": "object",
+        "properties": {
+          "countyId": {
+            "$ref": "#/components/schemas/Contracts.Common.Objects.IdWrapper"
+          },
+          "crossStreet": {
+            "type": "string",
+            "description": "Name of the cross street on which the equipment is located."
+          },
+          "direction": {
+            "minLength": 1,
+            "type": "string",
+            "description": "The name of the direction of the roadway."
+          },
+          "locationDescription": {
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string",
+            "description": "Name given to the physical location of the equipment."
+          },
+          "mileMarker": {
+            "maximum": 9999.99,
+            "minimum": 0,
+            "type": "number",
+            "description": "Mile marker of the location (to 4 decimal places of precision)",
+            "format": "double",
+            "nullable": true
+          },
+          "proximity": {
+            "$ref": "#/components/schemas/Contracts.Common.Objects.CrossStreetProximity"
+          },
+          "roadway": {
+            "minLength": 1,
+            "type": "string",
+            "description": "The name of the roadway."
+          }
+        },
+        "additionalProperties": false,
+        "description": "This is the location information for equipment"
+      },
+      "Contracts.Common.Objects.EquipmentStatus": {
+        "type": "object",
+        "properties": {
+          "intOpStatus": {
+            "type": "integer",
+            "description": "Integer accessor for op status; code should use enum version.",
+            "format": "int32"
+          },
+          "opStatus": {
+            "$ref": "#/components/schemas/Contracts.Common.Objects.OpStatus"
+          }
+        },
+        "additionalProperties": false,
+        "description": "The current status of the equipment"
+      },
+      "Contracts.Common.Objects.FdsProtocol": {
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "integer",
+            "description": "The drop address of the equipment.",
+            "format": "int32"
+          },
+          "connectionType": {
+            "type": "string",
+            "description": "The connection type."
+          },
+          "version": {
+            "type": "string",
+            "description": "The version of the FDS Protocol"
+          }
+        },
+        "additionalProperties": false,
+        "description": "FDS Protocol for the controller"
+      },
+      "Contracts.Common.Objects.GenericPrivileges": {
+        "type": "object",
+        "properties": {
+          "privilegeList": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": { }
+            },
+            "description": "The PrivilegeList."
+          }
+        },
+        "additionalProperties": false,
+        "description": "The GenericPrivileges."
+      },
+      "Contracts.Common.Objects.GenericUser": {
+        "type": "object",
+        "properties": {
+          "loggedIn": {
+            "type": "boolean",
+            "description": "The LoggedIn."
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the corridor for display purposes."
+          },
+          "privileges": {
+            "$ref": "#/components/schemas/Contracts.Common.Objects.GenericPrivileges"
+          }
+        },
+        "additionalProperties": false,
+        "description": "The GenericUser."
+      },
+      "Contracts.Common.Objects.HttpAddress": {
+        "type": "object",
+        "properties": {
+          "addressValue": {
+            "$ref": "#/components/schemas/Contracts.Common.Objects.AbstractDeviceAddress"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Address for equipment that use HTTP"
+      },
+      "Contracts.Common.Objects.HttpMethod": {
+        "enum": [
+          "Get",
+          "Post",
+          "Put",
+          "Delete",
+          "Patch"
+        ],
+        "type": "string",
+        "description": "The HttpMethod."
+      },
+      "Contracts.Common.Objects.HubKafkaMessage": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "The key.",
+            "nullable": true
+          },
+          "offset": {
+            "type": "integer",
+            "description": "The offset.",
+            "format": "int64",
+            "nullable": true
+          },
+          "partition": {
+            "type": "integer",
+            "description": "The partition.",
+            "format": "int32",
+            "nullable": true
+          },
+          "payloadUtf8Json": {
+            "type": "string",
+            "description": "The payload UTF8 json."
+          },
+          "schemaVersion": {
+            "type": "string",
+            "description": "The schema version."
+          },
+          "timestampUtc": {
+            "type": "string",
+            "description": "The timestamp UTC.",
+            "format": "date-time",
+            "nullable": true
+          },
+          "topic": {
+            "type": "string",
+            "description": "The topic."
+          }
+        },
+        "additionalProperties": false,
+        "description": "Class KafkaHubMessageEnvelope."
+      },
+      "Contracts.Common.Objects.HubRabbitMqMessage": {
+        "type": "object",
+        "properties": {
+          "payloadUtf8Json": {
+            "type": "string",
+            "description": "The payload UTF8 json."
+          },
+          "queueName": {
+            "type": "string",
+            "description": "The QueueName."
+          },
+          "schemaVersion": {
+            "type": "string",
+            "description": "The schema version."
+          },
+          "timestampUtc": {
+            "type": "string",
+            "description": "The timestamp UTC.",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Class RabbitMqHubMessage."
+      },
+      "Contracts.Common.Objects.Id": {
+        "required": [
+          "centerId",
+          "name",
+          "resourceType"
+        ],
+        "type": "object",
+        "properties": {
+          "centerId": {
+            "minLength": 1,
+            "type": "string",
+            "description": "The name of the center that owns this item"
+          },
+          "name": {
+            "minLength": 1,
+            "type": "string",
+            "description": "The name of the corridor for display purposes."
+          },
+          "remoteProviderName": {
+            "type": "string",
+            "description": "Indicates the provider name this object originated from in the remote district. Used by object received via RCA."
+          },
+          "resourceType": {
+            "minLength": 1,
+            "type": "string",
+            "description": "The type of resource of this item (e.g., link, dms, camera)"
+          }
+        },
+        "additionalProperties": false,
+        "description": "The unique identifier."
+      },
+      "Contracts.Common.Objects.IdAndStatusBase": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Contracts.Common.Objects.Id"
+          },
+          "status": {
+            "type": "string",
+            "description": "The status of the lane as pertains to this event (i.e., Cleared)."
+          }
+        },
+        "additionalProperties": false,
+        "description": "The IdAndStatusBase."
+      },
+      "Contracts.Common.Objects.IdAndStatus`1": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Contracts.Common.Objects.Id"
+          },
+          "status": {
+            "$ref": "#/components/schemas/TStatusType"
+          }
+        },
+        "additionalProperties": false,
+        "description": "The IdAndStatus`1."
+      },
+      "Contracts.Common.Objects.IdWrapper": {
+        "required": [
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Contracts.Common.Objects.Id"
+          }
+        },
+        "additionalProperties": false,
+        "description": "The IdWrapper."
+      },
+      "Contracts.Common.Objects.IpProtocol": {
+        "enum": [
+          "TCP",
+          "UDP"
+        ],
+        "type": "string",
+        "description": "The IpProtocol."
+      },
+      "Contracts.Common.Objects.IpServerAddress": {
+        "required": [
+          "ipAddress"
+        ],
+        "type": "object",
+        "properties": {
+          "ipAddress": {
+            "minLength": 1,
+            "type": "string",
+            "description": "The IP or hostname of the device"
+          },
+          "ipProtocol": {
+            "$ref": "#/components/schemas/Contracts.Common.Objects.IpProtocol"
+          },
+          "port": {
+            "maximum": 65535,
+            "minimum": 1,
+            "type": "integer",
+            "description": "The port number to use to communicate with the device",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false,
+        "description": "IP Address"
+      },
+      "Contracts.Common.Objects.KafkaTopicEnvelope`1": {
+        "type": "object",
+        "properties": {
+          "entityType": {
+            "type": "string",
+            "description": "The entity type."
+          },
+          "id": {
+            "type": "string",
+            "description": "The ID of the identified object."
+          },
+          "payload": {
+            "$ref": "#/components/schemas/T"
+          },
+          "sequence": {
+            "type": "integer",
+            "description": "The sequence.",
+            "format": "int64"
+          },
+          "timestamp": {
+            "type": "string",
+            "description": "The date/time that action occurred.",
+            "format": "date-time"
+          },
+          "version": {
+            "type": "string",
+            "description": "The version of the FDS Protocol"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Class KafkaTopicEnvelope."
+      },
+      "Contracts.Common.Objects.LanguageType": {
+        "enum": [
+          "English",
+          "Spanish",
+          "French",
+          "German"
+        ],
+        "type": "string",
+        "description": "The LanguageType."
+      },
+      "Contracts.Common.Objects.LibName": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the corridor for display purposes."
+          },
+          "subLibName": {
+            "$ref": "#/components/schemas/Contracts.Common.Objects.LibName"
+          }
+        },
+        "additionalProperties": false,
+        "description": "The library name can be nested several levels."
+      },
+      "Contracts.Common.Objects.LibNameWrapper": {
+        "type": "object",
+        "properties": {
+          "libName": {
+            "$ref": "#/components/schemas/Contracts.Common.Objects.LibName"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Container object for a wrapped library name."
+      },
+      "Contracts.Common.Objects.Library": {
+        "type": "object",
+        "properties": {
+          "libName": {
+            "type": "string",
+            "description": "The name of the library."
+          },
+          "parent": {
+            "$ref": "#/components/schemas/Contracts.Common.Objects.LibraryParent"
+          }
+        },
+        "additionalProperties": false,
+        "description": "A library contains varying objects, but always has a library name."
+      },
+      "Contracts.Common.Objects.LibraryParent": {
+        "type": "object",
+        "properties": {
+          "libName": {
+            "$ref": "#/components/schemas/Contracts.Common.Objects.LibName"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Container object for parent library name."
+      },
+      "Contracts.Common.Objects.Line": {
+        "type": "object",
+        "properties": {
+          "points": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Contracts.Common.Objects.Point"
+            },
+            "description": "The Points."
+          }
+        },
+        "additionalProperties": false,
+        "description": "Represents a line made of points."
+      },
+      "Contracts.Common.Objects.LogEntry": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "type": "string",
+            "description": "Tells the category that occurred."
+          },
+          "description": {
+            "type": "string",
+            "description": "The description of the action in detail."
+          },
+          "timestamp": {
+            "type": "string",
+            "description": "The date/time that action occurred.",
+            "format": "date-time"
+          },
+          "user": {
+            "type": "string",
+            "description": "The user who performed action."
+          }
+        },
+        "additionalProperties": false,
+        "description": "Represents a single log entry."
+      },
+      "Contracts.Common.Objects.Message": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "The Message."
+      },
+      "Contracts.Common.Objects.MfaAuthStatus": {
+        "enum": [
+          "None",
+          "Setup",
+          "Verify"
+        ],
+        "type": "string",
+        "description": "The MfaAuthStatus."
+      },
+      "Contracts.Common.Objects.MsgInfo": {
+        "type": "object",
+        "properties": {
+          "libName": {
+            "$ref": "#/components/schemas/Contracts.Common.Objects.LibName"
+          },
+          "msgId": {
+            "type": "string",
+            "description": "The message identifier."
+          }
+        },
+        "additionalProperties": false,
+        "description": "Container object for message's library name and message's Id."
+      },
+      "Contracts.Common.Objects.NoSuchResponseData`2": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "The NoSuchResponseData."
+      },
+      "Contracts.Common.Objects.NotificationClassification": {
+        "enum": [
+          "General",
+          "Operations",
+          "DeviceAdmin",
+          "DataFeeds"
+        ],
+        "type": "string",
+        "description": "The NotificationClassification."
+      },
+      "Contracts.Common.Objects.NtcipProtocol": {
+        "required": [
+          "readCommunityName",
+          "writeCommunityName"
+        ],
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "integer",
+            "description": "The drop address of the equipment.",
+            "format": "int32",
+            "nullable": true
+          },
+          "connectionType": {
+            "type": "string",
+            "description": "The connection type."
+          },
+          "readCommunityName": {
+            "minLength": 1,
+            "type": "string",
+            "description": "The read community name of the SNMP packet"
+          },
+          "version": {
+            "type": "string",
+            "description": "The version of the FDS Protocol"
+          },
+          "writeCommunityName": {
+            "minLength": 1,
+            "type": "string",
+            "description": "The write community name of the SNMP packet"
+          }
+        },
+        "additionalProperties": false,
+        "description": "NTCIP protocol"
+      },
+      "Contracts.Common.Objects.OpStatus": {
+        "enum": [
+          "Active",
+          "Error",
+          "Failed",
+          "OutOfService"
+        ],
+        "type": "string",
+        "description": "The OpStatus."
+      },
+      "Contracts.Common.Objects.ParentNode": {
+        "type": "object",
+        "properties": {
+          "downstreamNodes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Contracts.Common.Objects.ChildNode"
+            },
+            "description": "The DownstreamNodes."
+          },
+          "equipmentLocation": {
+            "$ref": "#/components/schemas/Contracts.Common.Objects.EquipmentLocation"
+          },
+          "id": {
+            "$ref": "#/components/schemas/Contracts.Common.Objects.Id"
+          },
+          "upstreamNodes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Contracts.Common.Objects.ChildNode"
+            },
+            "description": "The UpstreamNodes."
+          },
+          "virtual": {
+            "type": "boolean",
+            "description": "This flag indicates whether the given node is virtual.  Virtual nodes are conceptual branching points with no real equipment.  Non-virtual nodes represent real, physical devices."
+          }
+        },
+        "additionalProperties": false,
+        "description": "The ParentNode."
+      },
+      "Contracts.Common.Objects.Parity": {
+        "enum": [
+          "None",
+          "Odd",
+          "Even"
+        ],
+        "type": "string",
+        "description": "The Parity."
+      },
+      "Contracts.Common.Objects.PlatformComponentHeartbeat": {
+        "type": "object",
+        "properties": {
+          "component": {
+            "type": "string",
+            "description": "The component. e.g., \"Gateway\", \"DmsDriver\""
+          },
+          "environment": {
+            "type": "string",
+            "description": "The name of the environment. Dev/Staging/Prod"
+          },
+          "hostname": {
+            "type": "string",
+            "description": "The hostname."
+          },
+          "instanceId": {
+            "type": "string",
+            "description": "The instance identifier. The Key in Kafka (compacted)"
+          },
+          "macAddress": {
+            "type": "string",
+            "description": "The mac address."
+          },
+          "osDescription": {
+            "type": "string",
+            "description": "The os description."
+          },
+          "processId": {
+            "type": "integer",
+            "description": "The process identifier.",
+            "format": "int32"
+          },
+          "processName": {
+            "type": "string",
+            "description": "The name of the process."
+          },
+          "sequence": {
+            "type": "integer",
+            "description": "The sequence. Monotonic per-instance",
+            "format": "int64"
+          },
+          "startedAtUtc": {
+            "type": "string",
+            "description": "The started at UTC.",
+            "format": "date-time"
+          },
+          "status": {
+            "type": "string",
+            "description": "The status of the lane as pertains to this event (i.e., Cleared)."
+          },
+          "timestamp": {
+            "type": "string",
+            "description": "The date/time that action occurred.",
+            "format": "date-time"
+          },
+          "version": {
+            "type": "string",
+            "description": "The version of the FDS Protocol"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Class Heartbeat."
+      },
+      "Contracts.Common.Objects.PmppAddress": {
+        "type": "object",
+        "properties": {
+          "addressValue": {
+            "$ref": "#/components/schemas/Contracts.Common.Objects.AbstractDeviceAddress"
+          },
+          "communityName": {
+            "type": "string",
+            "description": "The CommunityName."
+          },
+          "readCommunityName": {
+            "type": "string",
+            "description": "The read community name of the SNMP packet"
+          },
+          "writeCommunityName": {
+            "type": "string",
+            "description": "The write community name of the SNMP packet"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Address for equipment that uses the SNMP (NTCIP) protocol"
+      },
+      "Contracts.Common.Objects.Point": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "The description of the action in detail."
+          },
+          "latitude": {
+            "type": "integer",
+            "description": "Latitude at the location of the equipment.",
+            "format": "int32"
+          },
+          "longitude": {
+            "type": "integer",
+            "description": "Longitude at the location of the equipment.",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false,
+        "description": "A point in the world, identified by its latitude and longitude."
+      },
+      "Contracts.Common.Objects.Polygon": {
+        "type": "object",
+        "properties": {
+          "points": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Contracts.Common.Objects.Point"
+            },
+            "description": "The Points."
+          }
+        },
+        "additionalProperties": false,
+        "description": "A polygon represented by its 3 or more points."
+      },
+      "Contracts.Common.Objects.PortServerAddress": {
+        "required": [
+          "portServerIp"
+        ],
+        "type": "object",
+        "properties": {
+          "address": {
+            "maximum": 65535,
+            "minimum": 1,
+            "type": "integer",
+            "description": "The drop address of the equipment.",
+            "format": "int32",
+            "nullable": true
+          },
+          "deviceId": {
+            "type": "string",
+            "description": "Device identifier of the equipment"
+          },
+          "portServerIp": {
+            "maxLength": 2147483647,
+            "minLength": 1,
+            "type": "string",
+            "description": "IP address for the port server"
+          },
+          "portServerPortNumber": {
+            "maximum": 65535,
+            "minimum": 1,
+            "type": "integer",
+            "description": "Port number for the port server",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false,
+        "description": "The PortServerAddress."
+      },
+      "Contracts.Common.Objects.PortServerUdpAddress": {
+        "type": "object",
+        "properties": {
+          "address": {
+            "maximum": 65535,
+            "minimum": 1,
+            "type": "integer",
+            "description": "The drop address of the equipment.",
+            "format": "int32",
+            "nullable": true
+          },
+          "deviceId": {
+            "type": "string",
+            "description": "Device identifier of the equipment"
+          },
+          "portServerIp": {
+            "type": "string",
+            "description": "IP address for the port server"
+          },
+          "portServerPortNumber": {
+            "type": "integer",
+            "description": "Port number for the port server",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false,
+        "description": "The PortServerUdpAddress."
+      },
+      "Contracts.Common.Objects.PrivilegeBase": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "The PrivilegeBase."
+      },
+      "Contracts.Common.Objects.ResponseData.DeviceLinkingRetrieveData": {
+        "type": "object",
+        "properties": {
+          "deviceLinkingData": {
+            "$ref": "#/components/schemas/Contracts.Common.Objects.DeviceLinkingData"
+          }
+        },
+        "additionalProperties": false,
+        "description": "The DeviceLinkingRetrieveData."
+      },
+      "Contracts.Common.Objects.ResponseData.EquipmentGroupData": {
+        "type": "object",
+        "properties": {
+          "equipmentGroup": {
+            "$ref": "#/components/schemas/Contracts.Common.Objects.EquipmentGroup"
+          }
+        },
+        "additionalProperties": false,
+        "description": "The response data received for an add equipment group response"
+      },
+      "Contracts.Common.Objects.ResponseData.GetItemNameData": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Contracts.Common.Objects.Id"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the corridor for display purposes."
+          }
+        },
+        "additionalProperties": false,
+        "description": "The response data received for a get item name response"
+      },
+      "Contracts.Common.Objects.ResponseData.IdData": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Contracts.Common.Objects.Id"
+          }
+        },
+        "additionalProperties": false,
+        "description": "The IdData."
+      },
+      "Contracts.Common.Objects.ResponseData.SetDeviceLinkingInfoData": {
+        "type": "object",
+        "properties": {
+          "deviceLinkingInfo": {
+            "$ref": "#/components/schemas/Contracts.Common.Objects.DeviceLinkingInfo"
+          }
+        },
+        "additionalProperties": false,
+        "description": "The SetDeviceLinkingInfoData."
+      },
+      "Contracts.Common.Objects.ResponseData.SetOpStatusData": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Contracts.Common.Objects.Id"
+          },
+          "opStatus": {
+            "$ref": "#/components/schemas/Contracts.Common.Objects.OpStatus"
+          }
+        },
+        "additionalProperties": false,
+        "description": "The SetOpStatusData."
+      },
+      "Contracts.Common.Objects.ResponsePlanType": {
+        "enum": [
+          "None",
+          "Email",
+          "Automatic",
+          "Predefined"
+        ],
+        "type": "string",
+        "description": "The ResponsePlanType."
+      },
+      "Contracts.Common.Objects.RoadwayDirection": {
+        "enum": [
+          "Northbound",
+          "Southbound",
+          "Eastbound",
+          "Westbound"
+        ],
+        "type": "string",
+        "description": "The RoadwayDirection."
+      },
+      "Contracts.Common.Objects.RoadwaySection": {
+        "required": [
+          "countyId",
+          "roadwayId"
+        ],
+        "type": "object",
+        "properties": {
+          "countyId": {
+            "$ref": "#/components/schemas/Contracts.Common.Objects.Id"
+          },
+          "direction": {
+            "$ref": "#/components/schemas/Contracts.Common.Objects.RoadwayDirection"
+          },
+          "endMileMarker": {
+            "maximum": 9999.9999,
+            "minimum": 0,
+            "type": "number",
+            "description": "The maximum mile marker value to describe the extent of this corridor.",
+            "format": "double"
+          },
+          "roadwayId": {
+            "$ref": "#/components/schemas/Contracts.Common.Objects.Id"
+          },
+          "startMileMarker": {
+            "maximum": 9999.9999,
+            "minimum": 0,
+            "type": "number",
+            "description": "The minimum mile marker value to describe the extent of this corridor.",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Represents a roadway section."
+      },
+      "Contracts.Common.Objects.SignedContent": {
+        "type": "object",
+        "properties": {
+          "sequenceNumber": {
+            "type": "integer",
+            "description": "An incrementing number unique within a given session. This is used to prevent duplication of signed messages.  Once a message signature has been verified by the receiver, future messages on the same session will only be accepted if their sequenceNumbers are greater than the last acccepted value.",
+            "format": "int32"
+          },
+          "signedContentId": {
+            "type": "string",
+            "description": "The SignedContentId."
+          }
+        },
+        "additionalProperties": false,
+        "description": "The SignedContent."
+      },
+      "Contracts.Common.Objects.SnmpProtocol": {
+        "required": [
+          "readCommunityName",
+          "writeCommunityName"
+        ],
+        "type": "object",
+        "properties": {
+          "connectionType": {
+            "type": "string",
+            "description": "The connection type."
+          },
+          "readCommunityName": {
+            "minLength": 1,
+            "type": "string",
+            "description": "The read community name of the SNMP packet"
+          },
+          "writeCommunityName": {
+            "minLength": 1,
+            "type": "string",
+            "description": "The write community name of the SNMP packet"
+          }
+        },
+        "additionalProperties": false,
+        "description": "SNMP protocol"
+      },
+      "Contracts.Common.Objects.SoapUrlAddress": {
+        "type": "object",
+        "properties": {
+          "address": {
+            "maximum": 65535,
+            "minimum": 1,
+            "type": "integer",
+            "description": "The drop address of the equipment.",
+            "format": "int32",
+            "nullable": true
+          },
+          "addressSpecified": {
+            "type": "boolean",
+            "description": "The AddressSpecified."
+          },
+          "deviceId": {
+            "type": "string",
+            "description": "Device identifier of the equipment"
+          },
+          "password": {
+            "type": "string",
+            "description": "The password to use."
+          },
+          "url": {
+            "type": "string",
+            "description": "URL to send request to"
+          }
+        },
+        "additionalProperties": false,
+        "description": "The SoapUrlAddress."
+      },
+      "Contracts.Common.Objects.StatusContentType": {
+        "enum": [
+          "Data",
+          "Error"
+        ],
+        "type": "string",
+        "description": "The StatusContentType."
+      },
+      "Contracts.Common.Objects.TelespotProtocol": {
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "integer",
+            "description": "The drop address of the equipment.",
+            "format": "int32"
+          },
+          "connectionType": {
+            "type": "string",
+            "description": "The connection type."
+          }
+        },
+        "additionalProperties": false,
+        "description": "Telespot Protocol for the controller"
+      },
+      "Contracts.Common.Objects.Transaction": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "The Transaction."
+      },
+      "Contracts.Common.Objects.UrlAddress": {
+        "type": "object",
+        "properties": {
+          "address": {
+            "maximum": 65535,
+            "minimum": 1,
+            "type": "integer",
+            "description": "The drop address of the equipment.",
+            "format": "int32",
+            "nullable": true
+          },
+          "deviceId": {
+            "type": "string",
+            "description": "Device identifier of the equipment"
+          },
+          "password": {
+            "type": "string",
+            "description": "The password to use."
+          },
+          "url": {
+            "type": "string",
+            "description": "URL to send request to"
+          }
+        },
+        "additionalProperties": false,
+        "description": "The UrlAddress."
+      },
+      "Contracts.Common.Objects.UserSessionHeartbeat": {
+        "type": "object",
+        "properties": {
+          "clientId": {
+            "type": "string",
+            "description": "OAuth/OpenID Connect client identifier that created the session.\r\nExample: \"operator-map\""
+          },
+          "clientInstanceId": {
+            "type": "string",
+            "description": "Unique identifier for the running client instance\r\n(browser tab, workstation app instance, etc.)."
+          },
+          "environment": {
+            "type": "string",
+            "description": "Logical environment name (dev, test, prod)."
+          },
+          "eventTimeUtc": {
+            "type": "string",
+            "description": "UTC timestamp when the heartbeat was generated.",
+            "format": "date-time"
+          },
+          "expiresAtUtc": {
+            "type": "string",
+            "description": "The UTC time when this session should be considered expired\r\nif no additional heartbeat is received.",
+            "format": "date-time"
+          },
+          "schemaVersion": {
+            "type": "string",
+            "description": "Schema version for forward/backward compatibility."
+          },
+          "sequence": {
+            "type": "integer",
+            "description": "Monotonically increasing sequence number for this session.\r\nHelps consumers ignore out-of-order heartbeats.",
+            "format": "int64"
+          },
+          "sessionId": {
+            "type": "string",
+            "description": "Unique identifier for this authenticated session.\r\nThis should also be used as the Kafka message key."
+          },
+          "state": {
+            "type": "string",
+            "description": "Current session state."
+          },
+          "userId": {
+            "type": "string",
+            "description": "Internal identifier for the authenticated user.\r\nAvoid using display names or PII."
+          }
+        },
+        "additionalProperties": false,
+        "description": "Class Heartbeat."
+      },
+      "Contracts.Common.Objects.User`1": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The Name."
+          },
+          "privileges": {
+            "$ref": "#/components/schemas/TPrivilege"
+          }
+        },
+        "additionalProperties": false,
+        "description": "The User`1."
+      },
+      "Contracts.Common.Objects.Util": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "The Util."
+      },
+      "Contracts.Common.Objects.VehicleAlertCameraData": {
+        "type": "object",
+        "properties": {
+          "cameraId": {
+            "$ref": "#/components/schemas/Contracts.Common.Objects.Id"
+          },
+          "cameraPreset": {
+            "type": "integer",
+            "description": "the preset number to switch the specified camera to from a vehicle alert.",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "This is the alert type used when receiving Vehicle alerts"
+      },
+      "Contracts.Common.Objects.XmlItem": {
+        "type": "object",
+        "properties": {
+          "displayName": {
+            "type": "string",
+            "description": "The DisplayName."
+          },
+          "id": {
+            "type": "integer",
+            "description": "The ID of the identified object.",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false,
+        "description": "The XmlItem."
+      },
+      "Contracts.Common.Objects.XmlStatusBase": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "The XmlStatusBase."
+      },
+      "Contracts.Common.Objects.XmlTreeItem": {
+        "type": "object",
+        "properties": {
+          "displayName": {
+            "type": "string",
+            "description": "The DisplayName."
+          },
+          "id": {
+            "type": "integer",
+            "description": "The ID of the identified object.",
+            "format": "int32"
+          },
+          "parent": {
+            "type": "integer",
+            "description": "The parent library if it exits.",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false,
+        "description": "The XmlTreeItem."
+      },
+      "Contracts.Common.Requests.AddEquipmentGroupReq": {
+        "type": "object",
+        "properties": {
+          "contractMetadata": {
+            "$ref": "#/components/schemas/Contracts.Core.ContractMetadata"
+          },
+          "equipmentGroup": {
+            "$ref": "#/components/schemas/Contracts.Common.Objects.EquipmentGroup"
+          }
+        },
+        "additionalProperties": false,
+        "description": "A request sent to add a new device group to the system."
+      },
+      "Contracts.Common.Requests.CopyEquipmentGroupReq": {
+        "type": "object",
+        "properties": {
+          "contractMetadata": {
+            "$ref": "#/components/schemas/Contracts.Core.ContractMetadata"
+          },
+          "id": {
+            "$ref": "#/components/schemas/Contracts.Common.Objects.Id"
+          },
+          "newGroupName": {
+            "type": "string",
+            "description": "The NewGroupName."
+          }
+        },
+        "additionalProperties": false,
+        "description": "The request to copy an existing equipment group to a new group name."
+      },
+      "Contracts.Common.Requests.DeleteEquipmentGroupReq": {
+        "type": "object",
+        "properties": {
+          "contractMetadata": {
+            "$ref": "#/components/schemas/Contracts.Core.ContractMetadata"
+          },
+          "id": {
+            "$ref": "#/components/schemas/Contracts.Common.Objects.Id"
+          }
+        },
+        "additionalProperties": false,
+        "description": "A request to delete a equipment group from the system."
+      },
+      "Contracts.Common.Requests.GetItemNameReq": {
+        "type": "object",
+        "properties": {
+          "contractMetadata": {
+            "$ref": "#/components/schemas/Contracts.Core.ContractMetadata"
+          },
+          "id": {
+            "$ref": "#/components/schemas/Contracts.Common.Objects.Id"
+          }
+        },
+        "additionalProperties": false,
+        "description": "A request sent to retrieve an item's name."
+      },
+      "Contracts.Common.Requests.ModifyEquipmentGroupReq": {
+        "type": "object",
+        "properties": {
+          "contractMetadata": {
+            "$ref": "#/components/schemas/Contracts.Core.ContractMetadata"
+          },
+          "equipmentGroup": {
+            "$ref": "#/components/schemas/Contracts.Common.Objects.EquipmentGroup"
+          }
+        },
+        "additionalProperties": false,
+        "description": "A request to modify the devices contained in an equipment group."
+      },
+      "Contracts.Common.Requests.SetDeviceLinkingInfoReq": {
+        "type": "object",
+        "properties": {
+          "contractMetadata": {
+            "$ref": "#/components/schemas/Contracts.Core.ContractMetadata"
+          },
+          "deviceLinkingInfo": {
+            "$ref": "#/components/schemas/Contracts.Common.Objects.DeviceLinkingInfo"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Comment describing your root element"
+      },
+      "Contracts.Common.Requests.SetOpStatusReq": {
+        "type": "object",
+        "properties": {
+          "contractMetadata": {
+            "$ref": "#/components/schemas/Contracts.Core.ContractMetadata"
+          },
+          "id": {
+            "$ref": "#/components/schemas/Contracts.Common.Objects.Id"
+          },
+          "opStatus": {
+            "$ref": "#/components/schemas/Contracts.Common.Objects.OpStatus"
+          }
+        },
+        "additionalProperties": false,
+        "description": "The SetOpStatusReq."
+      },
+      "Contracts.Common.Responses.AddEquipmentGroupResp": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "string",
+            "description": "The Content."
+          },
+          "contentType": {
+            "$ref": "#/components/schemas/Contracts.Common.Objects.StatusContentType"
+          },
+          "contractMetadata": {
+            "$ref": "#/components/schemas/Contracts.Core.ContractMetadata"
+          },
+          "data": {
+            "$ref": "#/components/schemas/Contracts.Common.Objects.ResponseData.EquipmentGroupData"
+          },
+          "error": {
+            "$ref": "#/components/schemas/Contracts.Core.Common.Objects.Error"
+          },
+          "isErrorResponse": {
+            "type": "boolean",
+            "description": "The IsErrorResponse."
+          }
+        },
+        "additionalProperties": false,
+        "description": "A response received for an add equipment group request."
+      },
+      "Contracts.Common.Responses.CopyEquipmentGroupResp": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "string",
+            "description": "The Content."
+          },
+          "contentType": {
+            "$ref": "#/components/schemas/Contracts.Common.Objects.StatusContentType"
+          },
+          "contractMetadata": {
+            "$ref": "#/components/schemas/Contracts.Core.ContractMetadata"
+          },
+          "data": {
+            "$ref": "#/components/schemas/Contracts.Common.Objects.ResponseData.EquipmentGroupData"
+          },
+          "error": {
+            "$ref": "#/components/schemas/Contracts.Core.Common.Objects.Error"
+          },
+          "isErrorResponse": {
+            "type": "boolean",
+            "description": "The IsErrorResponse."
+          }
+        },
+        "additionalProperties": false,
+        "description": "A response received for a copy equipment group request."
+      },
+      "Contracts.Common.Responses.DeleteEquipmentGroupResp": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "string",
+            "description": "The Content."
+          },
+          "contentType": {
+            "$ref": "#/components/schemas/Contracts.Common.Objects.StatusContentType"
+          },
+          "contractMetadata": {
+            "$ref": "#/components/schemas/Contracts.Core.ContractMetadata"
+          },
+          "data": {
+            "$ref": "#/components/schemas/Contracts.Common.Objects.ResponseData.IdData"
+          },
+          "error": {
+            "$ref": "#/components/schemas/Contracts.Core.Common.Objects.Error"
+          },
+          "isErrorResponse": {
+            "type": "boolean",
+            "description": "The IsErrorResponse."
+          }
+        },
+        "additionalProperties": false,
+        "description": "A response received for a delete equipment group request."
+      },
+      "Contracts.Common.Responses.ErrorResp": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "string",
+            "description": "The Content."
+          },
+          "contentType": {
+            "$ref": "#/components/schemas/Contracts.Common.Objects.StatusContentType"
+          },
+          "contractMetadata": {
+            "$ref": "#/components/schemas/Contracts.Core.ContractMetadata"
+          },
+          "data": {
+            "$ref": "#/components/schemas/Contracts.Common.Responses.ErrorResponseData"
+          },
+          "error": {
+            "$ref": "#/components/schemas/Contracts.Core.Common.Objects.Error"
+          },
+          "isErrorResponse": {
+            "type": "boolean",
+            "description": "The IsErrorResponse."
+          }
+        },
+        "additionalProperties": false,
+        "description": "Error response sent when no corresponding request can be used."
+      },
+      "Contracts.Common.Responses.ErrorResponseData": {
+        "type": "object",
+        "properties": {
+          "contractMetadata": {
+            "$ref": "#/components/schemas/Contracts.Core.ContractMetadata"
+          }
+        },
+        "additionalProperties": false,
+        "description": "The ErrorResponseData."
+      },
+      "Contracts.Common.Responses.GetItemNameResp": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "string",
+            "description": "The Content."
+          },
+          "contentType": {
+            "$ref": "#/components/schemas/Contracts.Common.Objects.StatusContentType"
+          },
+          "contractMetadata": {
+            "$ref": "#/components/schemas/Contracts.Core.ContractMetadata"
+          },
+          "data": {
+            "$ref": "#/components/schemas/Contracts.Common.Objects.ResponseData.GetItemNameData"
+          },
+          "error": {
+            "$ref": "#/components/schemas/Contracts.Core.Common.Objects.Error"
+          },
+          "isErrorResponse": {
+            "type": "boolean",
+            "description": "The IsErrorResponse."
+          }
+        },
+        "additionalProperties": false,
+        "description": "A response received for a get item name request."
+      },
+      "Contracts.Common.Responses.ModifyEquipmentGroupResp": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "string",
+            "description": "The Content."
+          },
+          "contentType": {
+            "$ref": "#/components/schemas/Contracts.Common.Objects.StatusContentType"
+          },
+          "contractMetadata": {
+            "$ref": "#/components/schemas/Contracts.Core.ContractMetadata"
+          },
+          "data": {
+            "$ref": "#/components/schemas/Contracts.Common.Objects.ResponseData.EquipmentGroupData"
+          },
+          "error": {
+            "$ref": "#/components/schemas/Contracts.Core.Common.Objects.Error"
+          },
+          "isErrorResponse": {
+            "type": "boolean",
+            "description": "The IsErrorResponse."
+          }
+        },
+        "additionalProperties": false,
+        "description": "A response received for a modify equipment group request."
+      },
+      "Contracts.Common.Responses.SetDeviceLinkingInfoResp": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "string",
+            "description": "The Content."
+          },
+          "contentType": {
+            "$ref": "#/components/schemas/Contracts.Common.Objects.StatusContentType"
+          },
+          "contractMetadata": {
+            "$ref": "#/components/schemas/Contracts.Core.ContractMetadata"
+          },
+          "data": {
+            "$ref": "#/components/schemas/Contracts.Common.Objects.ResponseData.SetDeviceLinkingInfoData"
+          },
+          "error": {
+            "$ref": "#/components/schemas/Contracts.Core.Common.Objects.Error"
+          },
+          "isErrorResponse": {
+            "type": "boolean",
+            "description": "The IsErrorResponse."
+          }
+        },
+        "additionalProperties": false,
+        "description": "Comment describing your root element"
+      },
+      "Contracts.Common.Responses.SetOpStatusResp": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "string",
+            "description": "The Content."
+          },
+          "contentType": {
+            "$ref": "#/components/schemas/Contracts.Common.Objects.StatusContentType"
+          },
+          "contractMetadata": {
+            "$ref": "#/components/schemas/Contracts.Core.ContractMetadata"
+          },
+          "data": {
+            "$ref": "#/components/schemas/Contracts.Common.Objects.ResponseData.SetOpStatusData"
+          },
+          "error": {
+            "$ref": "#/components/schemas/Contracts.Core.Common.Objects.Error"
+          },
+          "isErrorResponse": {
+            "type": "boolean",
+            "description": "The IsErrorResponse."
+          }
+        },
+        "additionalProperties": false,
+        "description": "The SetOpStatusResp."
+      },
+      "Contracts.Core.Common.Objects.EmptyResponseData": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "The EmptyResponseData."
+      },
+      "Contracts.Core.Common.Objects.Error": {
+        "type": "object",
+        "properties": {
+          "equipmentId": {
+            "type": "string",
+            "description": "The EquipmentId.",
+            "nullable": true
+          },
+          "errorCode": {
+            "type": "integer",
+            "description": "The ErrorCode.",
+            "format": "int32",
+            "nullable": true
+          },
+          "errorData": {
+            "type": "string",
+            "description": "The ErrorData.",
+            "nullable": true
+          },
+          "errorMap": {
+            "type": "string",
+            "description": "The ErrorMap.",
+            "nullable": true
+          },
+          "errorString": {
+            "type": "string",
+            "description": "The ErrorString.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "The Error."
+      },
+      "Contracts.Core.Common.Objects.ResponseData": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "The ResponseData."
+      },
+      "Contracts.Core.Common.Objects.SerializableDateTimeOffset": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "description": "The Value.",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "The SerializableDateTimeOffset."
+      },
+      "Contracts.Core.Common.Objects.SerializableTimeSpan": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "description": "The Value.",
+            "format": "duration",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "The SerializableTimeSpan."
+      },
+      "Contracts.Core.Common.Objects.SerializableTypeBase": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "The SerializableTypeBase."
+      },
+      "Contracts.Core.ContractMetadata": {
+        "required": [
+          "username"
+        ],
+        "type": "object",
+        "properties": {
+          "icdVersion": {
+            "type": "string",
+            "description": "The icd version.",
+            "nullable": true
+          },
+          "providerCenterId": {
+            "type": "string",
+            "description": "The provider center identifier.",
+            "nullable": true
+          },
+          "providerName": {
+            "type": "string",
+            "description": "The name of the provider.",
+            "nullable": true
+          },
+          "providerType": {
+            "type": "string",
+            "description": "The type of the provider.",
+            "nullable": true
+          },
+          "refId": {
+            "type": "string",
+            "description": "The reference identifier.",
+            "nullable": true
+          },
+          "tag": {
+            "type": "string",
+            "description": "The tag.",
+            "nullable": true
+          },
+          "traceParent": {
+            "type": "string",
+            "description": "The trace parent.",
+            "nullable": true
+          },
+          "username": {
+            "maxLength": 30,
+            "minLength": 1,
+            "type": "string",
+            "description": "The username."
+          }
+        },
+        "additionalProperties": false,
+        "description": "Class ContractMetadata holds common properties for requests, responses and messages."
+      },
+      "Microsoft.AspNetCore.Mvc.ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "detail": {
+            "type": "string",
+            "nullable": true
+          },
+          "instance": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": { }
+      },
+      "T": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "TPrivilege": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "TStatusType": {
+        "type": "object",
+        "additionalProperties": false
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Common",
+      "description": "Class CommonController.\r\nImplements the Microsoft.AspNetCore.Mvc.ControllerBase"
+    }
+  ]
+}
