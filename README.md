@@ -87,6 +87,8 @@ This corpus contains approximately **1 GB** of data, including:
 
 The two corpora do not overlap. During preprocessing, boilerplate content, social-media sharing widgets, duplicated adjacent lines, encoding artifacts, and website-specific templates or navigation texts were removed.
 
+Due to GitHub file size limitations, some corpus files are stored in compressed .7z format. Two .txt files in Corpus1 and four .txt files in Corpus2 are provided as .7z archives. These files should be extracted before training or evaluation.
+
 You are welcome to incorporate additional training data, provided that all input files are encoded in **UTF-8**.
 
 ---
