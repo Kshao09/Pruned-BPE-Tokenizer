@@ -36,6 +36,11 @@ After training with any of the above trainers, two vocab files will be generated
 
 `BPETrainer.py` and `BPETokenizer.py` are implementations of the vanilla BPE algorithm, which are included here for reference only.
 
+## License
+
+Copyright 2026 Kenny Shao
+
+Licensed under the Apache License, Version 2.0. See [LICENSE.txt](LICENSE.txt) for details.
 
 ## Basic Introduction of the Pruned BPE Algorithm
 
