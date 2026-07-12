@@ -62,7 +62,7 @@ Two training corpora are provided. They were also used during the development an
 
 ### Corpus I
 
-This corpus contains approximately **640 MB** of data, including:
+[This corpus](Corpus/Corpus1/) contains approximately **640 MB** of data, including:
 
 1. **English text** (approximately **430 MB**), consisting primarily of a locally collected sample from **FineWeb-Edu**, an educational English web-text dataset derived from the FineWeb/Common Crawl pipeline, together with a sample of Reddit posts.
 
@@ -74,7 +74,7 @@ This corpus contains approximately **640 MB** of data, including:
 
 ### Corpus II
 
-This corpus contains approximately **1 GB** of data, including:
+[This corpus](Corpus/Corpus2/) contains approximately **1 GB** of data, including:
 
 1. **English text**, consisting of:
 
