@@ -102,16 +102,17 @@ class _ParallelCorpus:
         if num_workers < 1:
             raise ValueError("num_workers must be >= 1")
 
-        # Do not create more workers than useful shards.
-        self.shards = _make_contiguous_shards(corpus, num_workers)
-        self.num_workers = len(self.shards)
+        # Build shards only as a local startup structure. Keeping them in
+        # self.shards would make the parent retain the complete corpus.
+        shards = _make_contiguous_shards(corpus, num_workers)
+        self.num_workers = len(shards)
 
         self.ctx = mp.get_context("spawn")
         self.processes = []
         self.conns = []
         self.closed = False
 
-        for shard_index, shard in enumerate(self.shards):
+        for shard_index, shard in enumerate(shards):
             parent_conn, child_conn = self.ctx.Pipe(duplex=True)
             proc = self.ctx.Process(
                 target=_parallel_bpe_worker,
@@ -123,6 +124,10 @@ class _ParallelCorpus:
 
             self.conns.append(parent_conn)
             self.processes.append(proc)
+
+        # On Windows, proc.start() serializes each shard before returning.
+        # The parent no longer needs the startup shard references.
+        del shards
 
         print(f"[ParallelBPE] Started {self.num_workers} worker process(es).", flush=True)
 
@@ -276,6 +281,11 @@ class PrunedBPETrainerCythonParallel(PrunedBPETrainer):
 
         parallel_corpus = _ParallelCorpus(corpus, num_workers=num_workers)
 
+        # The active corpus now lives in the worker processes. Release the
+        # parent-process references to avoid retaining another full corpus copy.
+        del corpus
+        self.corpus = []
+
         try:
             next_id = self._next_training_id()
             while next_id < self.train_vocab_size:
@@ -327,6 +337,11 @@ class PrunedBPETrainerCythonParallel(PrunedBPETrainer):
 
                     self.save_checkpoint(checkpoint_path)
 
+                    # Free the main-process full corpus copy after checkpointing.
+                    # Training continues inside parallel_corpus workers.
+                    self.corpus = []
+                    self.final_token_counts = Counter()
+
             self.corpus = parallel_corpus.get_corpus()
         except BaseException:
             parallel_corpus.terminate()
@@ -344,10 +359,10 @@ if __name__ == "__main__":
     from datetime import datetime
     from settings import PROJECT_ROOT
 
-    corpus_dir = os.path.join(PROJECT_ROOT, "Corpus", "Corpus1")
-    vocab_path = os.path.join(PROJECT_ROOT, "vocab_1.txt")
-    inter_vocab_path = os.path.join(PROJECT_ROOT, "inter_vocab_1.txt")
-    checkpoint_dir = os.path.join(PROJECT_ROOT, "checkpoints", "c1")
+    corpus_dir = os.path.join(PROJECT_ROOT, "Corpus")
+    vocab_path = os.path.join(PROJECT_ROOT, "vocab_12.txt")
+    inter_vocab_path = os.path.join(PROJECT_ROOT, "inter_vocab_12.txt")
+    checkpoint_dir = os.path.join(PROJECT_ROOT, "checkpoints", "c1c2")
 
     # External target vocabulary size includes reserved special tokens.
     TARGET_VOCAB_SIZE = 10_000
@@ -364,12 +379,12 @@ if __name__ == "__main__":
     if STAGE == 1:
         MIN_EXPOSURE_COUNT = 0
         TRAIN_VOCAB_SIZE = VISIBLE_VOCAB_SIZE
-        CHECKPOINT_VOCAB_SIZES = [8996, TRAIN_VOCAB_SIZE]
+        CHECKPOINT_VOCAB_SIZES = [8500, 9000, 9500, TRAIN_VOCAB_SIZE]
         # RESUME_CHECKPOINT_PATH = None
-        RESUME_CHECKPOINT_PATH = os.path.join(checkpoint_dir, "checkpoint_vocab_8190.pkl")
+        RESUME_CHECKPOINT_PATH = os.path.join(checkpoint_dir, "checkpoint_vocab_8000.pkl")
     elif STAGE == 2:
         # Look up the frequency of the last token trained in stage 1, and then * 0.2, * 0.3, or * 0.4 here
-        MIN_EXPOSURE_COUNT = math.ceil(4260 * 0.4)
+        MIN_EXPOSURE_COUNT = math.ceil(1904 * 0.4)
         # The loaded trainer still needs a train_vocab_size setting, but in stage 2 this is only
         # the starting size. The real upper limit is MAX_TRAIN_VOCAB_SIZE below.
         TRAIN_VOCAB_SIZE = VISIBLE_VOCAB_SIZE
@@ -378,7 +393,7 @@ if __name__ == "__main__":
         MAX_TRAIN_VOCAB_SIZE = math.ceil(1.2 * VISIBLE_VOCAB_SIZE)
         CHECKPOINT_VOCAB_SIZES = []
         # Load the Stage 1 checkpoint or any closer previous checkpoint.
-        RESUME_CHECKPOINT_PATH = os.path.join(checkpoint_dir, "checkpoint_vocab_8131.pkl")
+        RESUME_CHECKPOINT_PATH = os.path.join(checkpoint_dir, "checkpoint_vocab_14242.pkl")
     else:
         raise ValueError(f"Invalid STAGE: {STAGE}")
 
