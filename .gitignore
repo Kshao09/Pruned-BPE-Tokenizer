@@ -15,9 +15,6 @@ build/
 
 # Training outputs or log files
 checkpoints/
-experiments/c1/
-experiments/c2/
-experiments/c1c2/
 
 # OS files
 Thumbs.db
