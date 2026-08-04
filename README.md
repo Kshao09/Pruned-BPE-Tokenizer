@@ -54,6 +54,8 @@ Scaffold BPE also focuses on tokens that mainly serve as intermediate constructi
 
 Vocabulary Trimming is usually a post-processing step that removes rare subwords from an already trained BPE vocabulary, often using a third-party tool such as `subword-nmt`. Pruned BPE, instead, is integrated with token-ID remapping and token reallocation. It allows you to seamlessly train extra tokens to make use of the saved visible token space until `visible_vocab_size` reaches the desired target.
 
+For a detailed description and evaluation of the Pruned BPE algorithm, please refer to the arXiv preprint: [Pruned BPE: Post-training Visibility Pruning and Token Reallocation for Byte Pair Encoding](https://arxiv.org/abs/2608.00837).
+
 ## Introduction of the Pretokenization Step
 
 The pretokenization step splits input text into smaller chunks before byte-level BPE training or tokenization. In this implementation, the same pretokenization logic is used by both the trainer and the tokenizer. This helps avoid undesirable merges across boundaries such as markup tags, punctuation boundaries, or code-like structures. The pretokenizer is an implementation detail of this project; the core Pruned BPE idea can still be applied to other BPE training pipelines.
