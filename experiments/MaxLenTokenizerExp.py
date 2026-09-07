@@ -142,6 +142,7 @@ class MaxLenTokenizerExp(MaxLenTokenizer):
         """
         total_documents = 0
         total_final_tokens = 0
+        folder_token_counts: Dict[str, int] = {}
 
         for folder_index, folder_path in enumerate(
             folder_paths,
@@ -156,10 +157,14 @@ class MaxLenTokenizerExp(MaxLenTokenizer):
 
             print(f"Loaded {len(texts)} text records.")
 
+            folder_final_tokens = 0
+
             for text_index, text in enumerate(texts, start=1):
                 encoded = self.encode(text)
+                token_count = len(encoded)
 
-                total_final_tokens += len(encoded)
+                folder_final_tokens += token_count
+                total_final_tokens += token_count
                 total_documents += 1
 
                 if text_index % 100_000 == 0:
@@ -168,6 +173,9 @@ class MaxLenTokenizerExp(MaxLenTokenizer):
                         f"total documents={total_documents}, "
                         f"total final tokens={total_final_tokens}"
                     )
+
+            folder_name = os.path.basename(os.path.normpath(folder_path))
+            folder_token_counts[folder_name] = folder_final_tokens
 
             if len(folder_paths) > 1:
                 print(
@@ -181,17 +189,24 @@ class MaxLenTokenizerExp(MaxLenTokenizer):
             "folder_count": len(folder_paths),
             "document_count": total_documents,
             "final_token_count": total_final_tokens,
+            "folder_token_counts": folder_token_counts,
         }
 
 
 if __name__ == "__main__":
     from settings import PROJECT_ROOT
 
-    vocab_file = os.path.join(PROJECT_ROOT, "experiments", "c1c2", "18k", "vocab_p18k_0.4.txt")
+    vocab_file = os.path.join(PROJECT_ROOT, "experiments", "c2", "12k", "vocab_pruned_bpe_0.6.txt")
 
     dataset_folders = [
-        os.path.join(PROJECT_ROOT, "Corpus", "Corpus1"),
         os.path.join(PROJECT_ROOT, "Corpus", "Corpus2"),
+        os.path.join(PROJECT_ROOT, "Corpus", "Corpus1"),
+        os.path.join(PROJECT_ROOT, "Corpus", "Corpus3")
+        # os.path.join(PROJECT_ROOT, "Corpus", "Corpus3", "chinese_medicine"),
+        # os.path.join(PROJECT_ROOT, "Corpus", "Corpus3", "chinese_weibo"),
+        # os.path.join(PROJECT_ROOT, "Corpus", "Corpus3", "chinese_wiki"),
+        # os.path.join(PROJECT_ROOT, "Corpus", "Corpus3", "english_reddit"),
+        # os.path.join(PROJECT_ROOT, "Corpus", "Corpus3", "english_legal"),
     ]
 
     tokenizer = MaxLenTokenizerExp(vocab_file)
@@ -202,3 +217,7 @@ if __name__ == "__main__":
     print(f"Folders processed  : {stats['folder_count']}")
     print(f"Documents processed: {stats['document_count']}")
     print(f"Final token count  : {stats['final_token_count']}")
+
+    print("\nFinal token counts by corpus:")
+    for folder_name, token_count in stats["folder_token_counts"].items():
+        print(f"{folder_name}: {token_count:,}")
