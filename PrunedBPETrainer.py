@@ -421,7 +421,7 @@ class PrunedBPETrainer:
             next_target = min(current_next_id + extension_size, max_train_vocab_size)
 
             print(
-                f"\n[Visible-fill training] extending training: "
+                f"[Visible-fill training] extending training: "
                 f"{current_next_id} -> {next_target}",
                 flush=True,
             )

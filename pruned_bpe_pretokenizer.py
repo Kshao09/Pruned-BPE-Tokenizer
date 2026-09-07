@@ -86,8 +86,6 @@ def _scan_latin_word_like(text: str, start: int) -> int:
         C’était     -> C’était
         déjà        -> déjà
         Montréal    -> Montréal
-        C++         -> C++
-        C#          -> C#
     """
     n = len(text)
     i = start + 1
@@ -226,7 +224,7 @@ def pretokenize(text: str) -> List[str]:
     Main goals:
         - preserve all original text exactly
         - attach one ordinary leading space to following word/code chunks
-        - keep Latin/code terms like Node.js, GPT-4, C++, C#, abc123
+        - keep Latin/code terms like Node.js, GPT-4, abc123
         - keep French/accented Latin words like C'était, déjà, Montréal
         - split number-first mixed terms like 123abc
         - split Chinese date-like text:
