@@ -30,26 +30,15 @@ def convert_vocab(
     output_path = Path(output_path)
 
     if not input_path.is_file():
-        raise FileNotFoundError(
-            f"Input vocabulary not found: {input_path}"
-        )
+        raise FileNotFoundError(f"Input vocabulary not found: {input_path}")
 
     if input_path.resolve() == output_path.resolve():
-        raise ValueError(
-            "Input and output paths must be different"
-        )
+        raise ValueError("Input and output paths must be different")
 
     converted_tokens: list[str] = []
 
-    with input_path.open(
-        "r",
-        encoding="utf-8",
-        newline="",
-    ) as input_file:
-        for line_number, raw_line in enumerate(
-            input_file,
-            start=1,
-        ):
+    with input_path.open("r", encoding="utf-8", newline="") as input_file:
+        for line_number, raw_line in enumerate(input_file, start=1):
             # Remove only the physical line ending.
             # Do not use strip(), because spaces inside token literals matter.
             line = raw_line.rstrip("\r\n")
@@ -73,25 +62,14 @@ def convert_vocab(
             converted_tokens.append(token_literal)
 
     if not converted_tokens:
-        raise ValueError(
-            f"Input vocabulary is empty: {input_path}"
-        )
+        raise ValueError(f"Input vocabulary is empty: {input_path}")
 
-    output_path.parent.mkdir(
-        parents=True,
-        exist_ok=True,
-    )
+    output_path.parent.mkdir(parents=True, exist_ok=True)
 
-    temporary_path = output_path.with_name(
-        output_path.name + ".tmp"
-    )
+    temporary_path = output_path.with_name(output_path.name + ".tmp")
 
     try:
-        with temporary_path.open(
-            "w",
-            encoding="utf-8",
-            newline="\n",
-        ) as output_file:
+        with temporary_path.open("w", encoding="utf-8", newline="\n") as output_file:
             for token_literal in converted_tokens:
                 # Do not use repr(token_literal).
                 # The token literal is already formatted correctly.
@@ -99,7 +77,6 @@ def convert_vocab(
                 output_file.write("\n")
 
         temporary_path.replace(output_path)
-
     finally:
         if temporary_path.exists():
             temporary_path.unlink()
@@ -108,9 +85,6 @@ def convert_vocab(
 
 
 if __name__ == "__main__":
-    token_count = convert_vocab(
-        "vocab_old.txt",
-        "vocab_new.txt",
-    )
+    token_count = convert_vocab("vocab_old.txt","vocab_new.txt")
 
     print(f"Converted {token_count:,} tokens.")
