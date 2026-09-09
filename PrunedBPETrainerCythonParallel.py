@@ -354,18 +354,14 @@ class PrunedBPETrainerCythonParallel(PrunedBPETrainer):
             self.final_token_counts.update(ids)
 
 
-if __name__ == "__main__":
-    import time
-    from datetime import datetime
-    from settings import PROJECT_ROOT
-
+def pruned_bpe_main():
     corpus_dir = os.path.join(PROJECT_ROOT, "Corpus")
-    vocab_path = os.path.join(PROJECT_ROOT, "vocab_12.txt")
-    inter_vocab_path = os.path.join(PROJECT_ROOT, "inter_vocab_12.txt")
-    checkpoint_dir = os.path.join(PROJECT_ROOT, "checkpoints", "c1c2")
+    vocab_path = os.path.join(PROJECT_ROOT, "vocab_2.txt")
+    inter_vocab_path = os.path.join(PROJECT_ROOT, "inter_vocab_2.txt")
+    checkpoint_dir = os.path.join(PROJECT_ROOT, "checkpoints", "c2")
 
     # External target vocabulary size includes reserved special tokens.
-    TARGET_VOCAB_SIZE = 10_000
+    TARGET_VOCAB_SIZE = 12_000
     # Internal trainer visible vocabulary excludes reserved special tokens.
     VISIBLE_VOCAB_SIZE = TARGET_VOCAB_SIZE - NUM_RESERVED_TOKENS
 
@@ -375,7 +371,7 @@ if __name__ == "__main__":
     # Stage 2:
     # Load the Stage 1 checkpoint, set MIN_EXPOSURE_COUNT to the pruning
     # threshold, and continue training until visible learned tokens are full.
-    STAGE = 1
+    STAGE = 2
     if STAGE == 1:
         MIN_EXPOSURE_COUNT = 0
         TRAIN_VOCAB_SIZE = VISIBLE_VOCAB_SIZE
@@ -384,7 +380,7 @@ if __name__ == "__main__":
         RESUME_CHECKPOINT_PATH = os.path.join(checkpoint_dir, "checkpoint_vocab_8000.pkl")
     elif STAGE == 2:
         # Look up the frequency of the last token trained in stage 1, and then * 0.2, * 0.3, or * 0.4 here
-        MIN_EXPOSURE_COUNT = math.ceil(1904 * 0.4)
+        MIN_EXPOSURE_COUNT = math.ceil(4543 * 0.6)
         # The loaded trainer still needs a train_vocab_size setting, but in stage 2 this is only
         # the starting size. The real upper limit is MAX_TRAIN_VOCAB_SIZE below.
         TRAIN_VOCAB_SIZE = VISIBLE_VOCAB_SIZE
@@ -393,11 +389,11 @@ if __name__ == "__main__":
         MAX_TRAIN_VOCAB_SIZE = math.ceil(1.2 * VISIBLE_VOCAB_SIZE)
         CHECKPOINT_VOCAB_SIZES = []
         # Load the Stage 1 checkpoint or any closer previous checkpoint.
-        RESUME_CHECKPOINT_PATH = os.path.join(checkpoint_dir, "checkpoint_vocab_14242.pkl")
+        RESUME_CHECKPOINT_PATH = os.path.join(checkpoint_dir, "checkpoint_vocab_12420.pkl")
     else:
         raise ValueError(f"Invalid STAGE: {STAGE}")
 
-    NUM_WORKERS = 24
+    NUM_WORKERS = 12
 
     start_time = time.perf_counter()
     if RESUME_CHECKPOINT_PATH is None:
@@ -450,3 +446,79 @@ if __name__ == "__main__":
     print(f"Training elapsed hours: {train_elapsed / 3600:.4f}")
 
     trainer.save_vocab(vocab_path, inter_vocab_path)
+
+
+def dh_bpe_main():
+    # stage 1 only training for DP-Guided Hierarchical BPE
+    corpus_dir = os.path.join(PROJECT_ROOT, "Corpus", "Corpus2")
+    vocab_path = os.path.join(PROJECT_ROOT, f"vocab_s2k_tmp.txt")
+    inter_vocab_path = os.path.join(PROJECT_ROOT, f"inter_vocab_s2k_tmp.txt")
+    checkpoint_dir = os.path.join(PROJECT_ROOT, "checkpoints", "c2")
+
+    # BASE_18K = 18_000 - 256 - NUM_RESERVED_TOKENS
+    # TARGET_VOCAB_SIZE = math.ceil(BASE_18K * over_f) + 256 + NUM_RESERVED_TOKENS
+    TARGET_VOCAB_SIZE = 58_960
+    # Internal trainer visible vocabulary excludes reserved special tokens.
+    VISIBLE_VOCAB_SIZE = TARGET_VOCAB_SIZE - NUM_RESERVED_TOKENS
+
+    TRAIN_VOCAB_SIZE = VISIBLE_VOCAB_SIZE
+    # CHECKPOINT_VOCAB_SIZES = []
+    # save checkpoints at 23,736, 35,476, 47,216, and 58,956
+    CHECKPOINT_VOCAB_SIZES = [52_600, 53_400, 54_200, 55_000, 55_800, 56_600,
+                              57_400, 58_200, TRAIN_VOCAB_SIZE]
+    # RESUME_CHECKPOINT_PATH = None
+    RESUME_CHECKPOINT_PATH = os.path.join(checkpoint_dir, "checkpoint_vocab_51800.pkl")
+
+    NUM_WORKERS = 12
+
+    start_time = time.perf_counter()
+    if RESUME_CHECKPOINT_PATH is None:
+        print("Loading corpus...")
+        texts = PrunedBPETrainerCythonParallel.load_data(corpus_dir)
+
+        print(f"\nFinished loading corpus.")
+        print(f"Number of text items: {len(texts)}")
+        print(f"Training start time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+
+        trainer = PrunedBPETrainerCythonParallel(
+            train_vocab_size=TRAIN_VOCAB_SIZE,
+            visible_vocab_size=VISIBLE_VOCAB_SIZE,
+            min_exposure_count=0,
+        )
+    else:
+        texts = None
+        trainer = PrunedBPETrainerCythonParallel.load_checkpoint(
+            RESUME_CHECKPOINT_PATH,
+            train_vocab_size=TRAIN_VOCAB_SIZE,
+            visible_vocab_size=VISIBLE_VOCAB_SIZE,
+            min_exposure_count=0,
+        )
+
+        print(f"Resume training start time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+        print(f"Resume from next_id={trainer._next_training_id()}")
+        print(f"Visible vocab size={trainer.visible_vocab_size}")
+
+    trainer.train(
+        texts=texts,
+        checkpoint_vocab_sizes=CHECKPOINT_VOCAB_SIZES,
+        checkpoint_dir=checkpoint_dir,
+        num_workers=NUM_WORKERS,
+    )
+
+    train_elapsed = time.perf_counter() - start_time
+
+    print(f"\nTraining finished.")
+    print(f"Training elapsed seconds: {train_elapsed:.2f}")
+    print(f"Training elapsed hours: {train_elapsed / 3600:.4f}")
+
+    trainer.save_vocab(vocab_path, inter_vocab_path)
+
+
+if __name__ == "__main__":
+    import time
+    from datetime import datetime
+    from settings import PROJECT_ROOT
+
+    # Uncomment one here to run training for Pruned BPE or DH-BPE
+    # pruned_bpe_main()
+    # dh_bpe_main()
