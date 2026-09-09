@@ -1,0 +1,35 @@
+{
+  "tokenizer_variant": "mingram",
+  "source": "standalone adaptation of script_tok default MinGram",
+  "objective": 2.214849251204857,
+  "total_tokens": 290172998,
+  "tokens_per_pretoken": 1.8041473397843468,
+  "num_iterations": 2,
+  "totals_removed": {
+    "M Step Low Count": [
+      22,
+      1,
+      0,
+      0
+    ],
+    "Prune/Score": [
+      2338
+    ],
+    "Finalize": [
+      0
+    ]
+  },
+  "config": {
+    "target_vocab_size": 16000,
+    "final_ordinary_vocab_size": 15996,
+    "final_learned_vocab_size": 15740,
+    "overshoot_factor": 1.15,
+    "bpe_seed_ordinary_size": 18357,
+    "bpe_seed_learned_size": 18101,
+    "num_em_iterations": 2,
+    "score_delta": 1e-05,
+    "prune_criterion": "usage_count",
+    "num_workers": 8
+  },
+  "elapsed_seconds": 832.5962397999974
+}

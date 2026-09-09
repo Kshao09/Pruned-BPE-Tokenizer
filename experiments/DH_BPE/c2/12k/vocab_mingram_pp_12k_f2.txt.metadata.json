@@ -1,0 +1,112 @@
+{
+  "tokenizer_variant": "mingram_pp",
+  "source": "standalone adaptation of script_tok MinGram with PathPiece-style Minimum-Increase pruning",
+  "objective": 2.261595538721087,
+  "total_tokens": 302442192,
+  "tokens_per_pretoken": 1.8804309149928093,
+  "num_iterations": 7,
+  "totals_removed": {
+    "M Step Low Count": [
+      34,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "Prune/MI": [
+      2600,
+      2340,
+      2106,
+      1895,
+      1706,
+      1058
+    ]
+  },
+  "pruning_history": [
+    {
+      "round": 1,
+      "model_size_before": 23701,
+      "target_size": 21101,
+      "removed": 2600,
+      "model_size_after": 21101,
+      "corpus_token_count_before_prune": 275081826,
+      "zero_mi_candidates": 1,
+      "infinite_mi_candidates": 0
+    },
+    {
+      "round": 2,
+      "model_size_before": 21101,
+      "target_size": 18761,
+      "removed": 2340,
+      "model_size_after": 18761,
+      "corpus_token_count_before_prune": 277643988,
+      "zero_mi_candidates": 0,
+      "infinite_mi_candidates": 0
+    },
+    {
+      "round": 3,
+      "model_size_before": 18761,
+      "target_size": 16655,
+      "removed": 2106,
+      "model_size_after": 16655,
+      "corpus_token_count_before_prune": 282096060,
+      "zero_mi_candidates": 0,
+      "infinite_mi_candidates": 0
+    },
+    {
+      "round": 4,
+      "model_size_before": 16655,
+      "target_size": 14760,
+      "removed": 1895,
+      "model_size_after": 14760,
+      "corpus_token_count_before_prune": 286938529,
+      "zero_mi_candidates": 0,
+      "infinite_mi_candidates": 0
+    },
+    {
+      "round": 5,
+      "model_size_before": 14760,
+      "target_size": 13054,
+      "removed": 1706,
+      "model_size_after": 13054,
+      "corpus_token_count_before_prune": 292291555,
+      "zero_mi_candidates": 0,
+      "infinite_mi_candidates": 0
+    },
+    {
+      "round": 6,
+      "model_size_before": 13054,
+      "target_size": 11996,
+      "removed": 1058,
+      "model_size_after": 11996,
+      "corpus_token_count_before_prune": 298176011,
+      "zero_mi_candidates": 0,
+      "infinite_mi_candidates": 0
+    }
+  ],
+  "config": {
+    "target_vocab_size": 12000,
+    "final_ordinary_vocab_size": 11996,
+    "final_learned_vocab_size": 11740,
+    "overshoot_factor": 2.0,
+    "bpe_seed_ordinary_size": 23736,
+    "bpe_seed_learned_size": 23480,
+    "num_em_iterations": 2,
+    "score_delta": 1e-05,
+    "prune_criterion": "mi",
+    "pruning_shrinking_factor": 0.9,
+    "skip_substring_in_batch": false,
+    "max_substring_skip_len": 16,
+    "num_workers": 16
+  },
+  "elapsed_seconds": 3653.987632000004
+}
