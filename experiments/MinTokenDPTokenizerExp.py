@@ -1,13 +1,19 @@
 from __future__ import annotations
 
 import os
-from typing import Dict, List
+from typing import Dict, List, TypedDict
 
-from MaxLenTokenizer import MaxLenTokenizer
+from MinTokenDPTokenizer import MinTokenDPTokenizer
 from PrunedBPETrainer import PrunedBPETrainer
 
+class TokenizeDatasetResult(TypedDict):
+    folder_count: int
+    document_count: int
+    final_token_count: int
+    folder_token_counts: Dict[str, int]
 
-class MaxLenTokenizerExp(MaxLenTokenizer):
+
+class MaxLenTokenizerExp(MinTokenDPTokenizer):
     """
     Experiment wrapper for minimum-length vocabulary-only tokenization.
 
@@ -30,7 +36,6 @@ class MaxLenTokenizerExp(MaxLenTokenizer):
 
     Both tokenizers also use the same pretokenization boundaries.
     """
-
     def __init__(self, vocab_path: str):
         super().__init__(vocab_path)
 
@@ -133,7 +138,7 @@ class MaxLenTokenizerExp(MaxLenTokenizer):
     def tokenize_dataset(
         self,
         folder_paths: List[str],
-    ) -> Dict[str, int]:
+    ) -> TokenizeDatasetResult:
         """
         Tokenize all text loaded from the given dataset folders and return counts.
 
@@ -196,7 +201,7 @@ class MaxLenTokenizerExp(MaxLenTokenizer):
 if __name__ == "__main__":
     from settings import PROJECT_ROOT
 
-    vocab_file = os.path.join(PROJECT_ROOT, "experiments", "c2", "12k", "vocab_pruned_bpe_0.6.txt")
+    vocab_file = os.path.join(PROJECT_ROOT, "experiments", "DH_BPE", "c2", "12k", "vocab_pruned_bpe_0.6.txt")
 
     dataset_folders = [
         os.path.join(PROJECT_ROOT, "Corpus", "Corpus2"),

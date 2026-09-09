@@ -7,7 +7,7 @@ from typing import Iterable, Sequence
 from pruned_bpe_pretokenizer import pretokenize
 
 
-class MaxLenTokenizer:
+class MinTokenDPTokenizer:
     """
     Vocabulary-only byte tokenizer.
 
@@ -373,7 +373,7 @@ class MaxLenTokenizer:
 
 
 if __name__ == "__main__":
-    tokenizer = MaxLenTokenizer("vocab_new.txt")
+    tokenizer = MinTokenDPTokenizer("vocab_new.txt")
 
     test_texts = [
         "能",
