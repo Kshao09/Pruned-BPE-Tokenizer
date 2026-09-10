@@ -1,24 +1,24 @@
 # Pruned BPE and DH-BPE Tokenization
 
-This project presents a Python/Cython implementation and experimental data for two publications: Pruned-BPE and DH-BPE.
+This project provides Python/Cython implementations and experimental data for two publications: Pruned BPE and DH-BPE.
 
-Both tokenization share the same main trainer. Its Cython-based entry file is:
+Both tokenization methods share the same main trainer implementation. The Cython-based trainer entry points are:
 
-`PrunedBPETrainerCython.py` or `PrunedBPETrainerCythonParallel.py`
+`PrunedBPETrainerCython.py` and `PrunedBPETrainerCythonParallel.py`
 
-The first is single-threaded, while the second supports parallel processing and can efficiently use multiple CPU cores. Therefore, the parallel version is the better choice if you have an advanced multi-core CPU.
+The first is single-threaded, while the second supports parallel processing across multiple CPU cores. Therefore, the parallel version is generally recommended on multi-core systems.
 
-Both trainers require their corresponding Cython core to be compiled before running.
+Both Cython trainers require their corresponding Cython core to be compiled before use.
 
-All trainers support checkpoints, which allow you to resume training if you feel the training process is too long. This is especially helpful when you need to adjust `train_vocab_size` or `visible_vocab_size`, because it may not be clear which size is suitable when working with a large amount of training data. You can update `train_vocab_size`, `visible_vocab_size`, and `min_exposure_count` when you resume training from a checkpoint.
+All trainers support checkpoints, allowing long-running training jobs to be resumed. This is especially useful when adjusting `train_vocab_size` or `visible_vocab_size`, since appropriate values may not be known in advance when working with large training corpora. When resuming from a checkpoint, you can update `train_vocab_size`, `visible_vocab_size`, and `min_exposure_count`.
 
-In `PrunedBPETrainerCythonParallel.py`, there are two main methods, one for trainings used in Pruned BPE, the other for DH-BPE.
+`PrunedBPETrainerCythonParallel.py` provides two main training methods: one for Pruned BPE and one for DH-BPE.
 
 A pure Python version of the trainer is also included: `PrunedBPETrainer.py`.
 
-After training with any of the above trainers, two vocab files will be generated: `vocab.txt` and `inter_vocab.txt`. You can then use `PrunedBPETokenizer.py` to perform tokenization. `inter_vocab.txt` is only used in Pruned BPE, and is discarded in DH-BPE.
+After training with any of the trainers above, two vocabulary files are generated: `vocab.txt` and `inter_vocab.txt`. You can then use `PrunedBPETokenizer.py` to perform tokenization. `inter_vocab.txt` is used only in Pruned BPE and is discarded in DH-BPE.
 
-`BPETrainer.py` and `BPETokenizer.py` are implementations of the vanilla BPE algorithm, which are included here for reference only.
+`BPETrainer.py` and `BPETokenizer.py` are implementations of the vanilla BPE algorithm and are included for reference only.
 
 ## License
 
@@ -26,24 +26,29 @@ Copyright 2026 Kenny Shao
 
 Licensed under the Apache License, Version 2.0. See [LICENSE.txt](LICENSE.txt) for details.
 
-## Basic Introduction of the Pruned BPE and DH-BPE
+## Overview of Pruned BPE and DH-BPE
 
-Pruned BPE is based on the standard Byte Pair Encoding training process. It still learns merge rules by repeatedly merging the most frequent adjacent token pair in the training corpus. The difference is that, after training, learned tokens are analyzed by their final exposure counts. Frequently exposed tokens are saved in `vocab.txt` as model-visible tokens, while low-exposure tokens are saved in `inter_vocab.txt` as internal construction tokens. In `PrunedBPETrainerCythonParallel.py`, you see it used two-stage training. Stage 1 performs standard BPE training, while stage 2 allows to continue training until the desired model-visible vocabulary is fully filled.
+Pruned BPE is based on the standard Byte Pair Encoding training process. It still learns merge rules by repeatedly merging the most frequent adjacent token pair in the training corpus. The difference is that, after training, learned tokens are analyzed by their final exposure counts. Frequently exposed tokens are saved in `vocab.txt` as model-visible tokens, while low-exposure tokens are saved in `inter_vocab.txt` as internal construction tokens.
+
+In `PrunedBPETrainerCythonParallel.py`, Pruned BPE uses a two-stage training procedure. Stage 1 performs standard BPE training, while Stage 2 continues training until the desired model-visible vocabulary is fully filled.
 
 For a detailed description and evaluation of the Pruned BPE algorithm, please refer to the arXiv preprint: [Pruned BPE: Post-training Visibility Pruning and Token Reallocation for Byte Pair Encoding](https://arxiv.org/abs/2608.00837).
 
-DH-BPE is a vocabulary-construction method that combines token exposure under exact minimum-token segmentation with the hierarchical dependencies induced by BPE training. Starting from a modestly overshot BPE candidate vocabulary, DHBPE uses dynamic programming to measure candidate utility and applies exposure-guided, dependencyaware pruning to select a fixed-size model-visible vocabulary. In this project, it uses `PrunedBPETrainerCythonParallel.py` to train to an overshot vocabulary size based on the desired overshoot factor, and then use `PruneDPVocab.py` to perform vocabulary pruning by specifying the pruning ratio. 
+DH-BPE is a vocabulary-construction method that combines token exposure under exact minimum-token segmentation with the hierarchical dependencies induced by BPE training. Starting from a modestly overshot BPE candidate vocabulary, DH-BPE uses dynamic programming to measure candidate utility and applies exposure-guided, dependency-aware pruning to select a fixed-size model-visible vocabulary.
 
-For a detailed description and evaluation of the DH-BPE algorithm, please refer to the arXiv preprint: [Dynamic-Programming-Guided Hierarchical BPE and Empirical
-Analysis of Vocabulary Pruning](https://arxiv.org/abs/2609.06898).
+In this project, `PrunedBPETrainerCythonParallel.py` is used to train an overshot vocabulary based on the desired overshoot factor, after which `PruneDPVocab.py` performs vocabulary pruning using the specified pruning ratio.
 
-## Introduction of the Pretokenization Step
+For a detailed description and evaluation of the DH-BPE algorithm, please refer to the arXiv preprint: [Dynamic-Programming-Guided Hierarchical BPE and Empirical Analysis of Vocabulary Pruning](https://arxiv.org/abs/2609.06898).
 
-The pretokenization step splits input text into smaller chunks before byte-level BPE training or tokenization. In this implementation, the same pretokenization logic is used by both the trainer and the tokenizer. This helps avoid undesirable merges across boundaries such as markup tags, punctuation boundaries, or code-like structures. The pretokenizer is an implementation detail of this project; the core Pruned BPE idea can still be applied to other BPE training pipelines.
+## Pretokenization
+
+The pretokenization step splits input text into smaller chunks before byte-level BPE training or tokenization. In this implementation, the same pretokenization logic is used by both the trainer and tokenizer. This helps avoid undesirable merges across boundaries such as markup tags, punctuation boundaries, or code-like structures.
+
+The pretokenizer is an implementation detail of this project; the core Pruned BPE idea can still be applied to other BPE training pipelines.
 
 ## Corpus Data
 
-Two training corpora are provided. They were also used during the development and testing of the proposed algorithm to verify the correctness of all trainer implementations and the tokenizer.
+Two training corpora and one additional evaluation corpus are provided. Corpus I and Corpus II are used for training, while Corpus III is used for evaluation and parameter tuning in the DH-BPE experiments.
 
 ### Corpus I
 
@@ -75,25 +80,25 @@ Two training corpora are provided. They were also used during the development an
 
 4. **An 84 MB multilingual corpus** covering **42 languages** other than English and Chinese, with approximately equal amounts of text for each language. These languages include Arabic, French, Spanish, Portuguese, Russian, Japanese, Korean, and many others.
 
-The two corpora do not overlap. During preprocessing, boilerplate content, social-media sharing widgets, duplicated adjacent lines, encoding artifacts, and website-specific templates or navigation texts were removed.
+The two training corpora do not overlap. During preprocessing, boilerplate content, social-media sharing widgets, duplicated adjacent lines, encoding artifacts, and website-specific templates or navigation text were removed.
 
-Due to GitHub file size limitations, some corpus files are stored in compressed .7z format. Two .txt files in Corpus1 and four .txt files in Corpus2 are provided as .7z archives. These files should be extracted before training or evaluation.
+Due to GitHub file size limitations, some corpus files are stored in compressed `.7z` format. Two `.txt` files in Corpus I and four `.txt` files in Corpus II are provided as `.7z` archives. These files should be extracted before training or evaluation.
 
 You are welcome to incorporate additional training data, provided that all input files are encoded in **UTF-8**.
 
 ### Corpus III
 
-[This corpus](Corpus/Corpus3) contains approximately **900 MB** of data, with 17 files each of which is in compressed .7z format. It is an evaluation and parameter-tuning corpus used in DH-BPE publication only. It contains five subsets with different degrees of similarity to the training data: 
+[This corpus](Corpus/Corpus3) contains approximately **900 MB** of data across 17 files, all distributed in compressed `.7z` format. It is an evaluation and parameter-tuning corpus used only in the DH-BPE paper. It contains five subsets with different degrees of similarity to the training data:
 
-1. Approximately 170 MB of Chinese medical-domain text.
+1. Approximately **170 MB** of Chinese medical-domain text.
 
-2. 40 MB of Chinese Weibo text drawn from the same general source and with a similar distribution to the social-media data in Corpus I, but without overlapping samples. 
+2. **40 MB** of Chinese Weibo text drawn from the same general source and with a similar distribution to the social-media data in Corpus I, but without overlapping samples.
 
-3. 90 MB of Simplified and Traditional Chinese Wikipedia text drawn from the same source type as the Wikipedia data in Corpus I and Corpus II, but using non-overlapping pages covering different topics. 
+3. **90 MB** of Simplified and Traditional Chinese Wikipedia text drawn from the same source type as the Wikipedia data in Corpus I and Corpus II, but using non-overlapping pages covering different topics.
 
-4. 240 MB of English legal text sampled from the CourtListener opinions component of the Pile of Law dataset.
+4. **240 MB** of English legal text sampled from the CourtListener opinions component of the Pile of Law dataset.
 
-5. 363 MB of English Reddit text, drawn from source files not used for the Reddit data in Corpus I and Corpus II.
+5. **363 MB** of English Reddit text drawn from source files not used for the Reddit data in Corpus I and Corpus II.
 
 ---
 
@@ -101,7 +106,7 @@ You are welcome to incorporate additional training data, provided that all input
 
 This project requires **Python 3.10+**.
 
-Python 3.10 or newer is needed because the project (the pure Python trainer) uses:
+Python 3.10 or newer is needed because the pure Python trainer uses:
 
 ```python
 from itertools import pairwise
@@ -112,6 +117,7 @@ Check your Python version:
 ```bash
 python --version
 ```
+
 ---
 
 ## 2. Create and Activate a Virtual Environment
@@ -157,11 +163,14 @@ cython
 setuptools
 wheel
 ```
+
 ---
 
 ## 4. Project Files
 
-`pruned_bpe_pretokenizer.py` is used by all Pruned BPE trainers and by the Pruned BPE tokenizer:
+`pruned_bpe_pretokenizer.py` contains the shared pretokenization logic used by the Pruned BPE trainers and `PrunedBPETokenizer.py`.
+
+The main trainer, tokenizer, and DH-BPE vocabulary-processing files are:
 
 ```text
 PrunedBPETrainer.py
@@ -172,39 +181,45 @@ PruneDPVocab.py
 MinTokenDPTokenizer.py
 ```
 
-### Trainers, Dependent Files and other core scripts
+### Trainers, Dependent Files, and Other Core Scripts
 
-`PrunedBPETrainer.py`
+#### `PrunedBPETrainer.py`
 
-The pure python version of the trainer file. Other than `pruned_bpe_pretokenizer.py`, it does not depend on any other files.
+This is the pure Python version of the trainer. Other than `pruned_bpe_pretokenizer.py`, it does not depend on any other project files.
 
-This is useful if you do not want to set up a Cython environment. It is also the base/parent class file for the other two trainer classes.
+It is useful if you do not want to set up a Cython environment. It is also the base class for the other two trainer classes.
 
-`PrunedBPETrainerCython.py`
+#### `PrunedBPETrainerCython.py`
 
-This depends on `bpe_fast_core.pyx`. The `setup_bpe_fast.py` file shows how the core should be compiled. `bpe_fast_core.pyi` is optional, which just provides type annotations and API structures for the main Cython.py file.
+This trainer depends on `bpe_fast_core.pyx`. The `setup_bpe_fast.py` file shows how the Cython core should be compiled.
 
-`PrunedBPETrainerCythonParallel.py`
+`bpe_fast_core.pyi` is optional and provides type annotations and API structure information for the compiled Cython module.
 
-This depends on `bpe_fast_core_parallel.pyx`. The `setup_bpe_fast_parallel.py` file shows how the core should be compiled. Similar to the .pyi file explained above, `bpe_fast_core_parallel.pyi` is optional as well.
+#### `PrunedBPETrainerCythonParallel.py`
 
-`PruneDPVocab.py`
+This trainer depends on `bpe_fast_core_parallel.pyx`. The `setup_bpe_fast_parallel.py` file shows how the parallel Cython core should be compiled.
 
-This vocabulary pruning script is specifically used by DH-BPE. Given a modestly overshot BPE candidate vocabulary, the original training corpus, desired overshoot factor and pruning ratio, it outputs the final target vocabulary file.
+Similar to the `.pyi` file described above, `bpe_fast_core_parallel.pyi` is optional.
 
-The minimum token DP encoding algorithm in this Python script use the exact same implementation as in that in `MinTokenDPTokenizer.py`. As the vocabulary pruning (a training step) is the core step in DH-BPE, the implementation is self-contained.
+#### `PruneDPVocab.py`
 
-`MinTokenDPTokenizer.py` 
+This vocabulary-pruning script is specifically used by DH-BPE. Given a modestly overshot BPE candidate vocabulary, the original training corpus, the desired overshoot factor, and the pruning ratio, it outputs the final target vocabulary file.
 
-This is an independent dynamic-programming encoder that minimizes the number of output tokens using only a list of model-visible tokens. `ConvertVocab.py` in the tools folder converts the `vocab.txt` file generated by any Pruned BPE trainer into the format required by this encoder.
+The minimum-token DP encoding algorithm in this script uses the same implementation as the one in `MinTokenDPTokenizer.py`. Because vocabulary pruning is a core training step in DH-BPE, the implementation is self-contained.
 
-This tokenizer is also used by `MinTokenDPTokenizerExp.py` script in the experiment folder, which is the one used for all the experimental evaluation in DH-BPE publication.
+#### `MinTokenDPTokenizer.py`
+
+This is an independent dynamic-programming encoder that minimizes the number of output tokens using only a list of model-visible tokens.
+
+`ConvertVocab.py` in the tools folder converts the `vocab.txt` file generated by any Pruned BPE trainer into the format required by this encoder.
+
+This tokenizer is also used by the `MinTokenDPTokenizerExp.py` script in the experiment folder, which was used for the experimental evaluations in the DH-BPE publication.
 
 ---
 
 ## 5. Compile the Cython Extension
 
-### Option 1: Run PrunedBPETrainerCython Trainer
+### Option 1: Run the `PrunedBPETrainerCython` Trainer
 
 From the project root folder, run:
 
@@ -223,9 +238,10 @@ After compilation, `PrunedBPETrainerCython.py` should be able to import the comp
 ```python
 from bpe_fast_core import find_best_pair
 ```
+
 ---
 
-### Option 2: Run PrunedBPETrainerCythonParallel Trainer
+### Option 2: Run the `PrunedBPETrainerCythonParallel` Trainer
 
 From the project root folder, run:
 
@@ -235,7 +251,9 @@ python setup_bpe_fast_parallel.py build_ext --inplace
 
 Similar `.pyd`, `.c`, or `.cpp` files will be generated.
 
-Note that the `build` folder generated during the above compilation processes is temporary. It can be kept or safely deleted.
+Note that the `build` folder generated during the compilation process is temporary. It can be kept or safely deleted.
+
+---
 
 ## 6. Run the Cython Trainer
 
@@ -244,7 +262,9 @@ After the Cython extension has been compiled successfully, run:
 ```bash
 python PrunedBPETrainerCython.py
 ```
-OR
+
+or:
+
 ```bash
 python PrunedBPETrainerCythonParallel.py
 ```
@@ -264,14 +284,21 @@ The interpreter path usually looks like:
 ```text
 .venv\Scripts\python.exe
 ```
+
 ---
 
 ## 7. Rebuild After Changing Cython Code
 
-If you modify the `.pyx` file, you must compile again, such as (or the parallel one):
+If you modify a `.pyx` file, you must compile it again. For example:
 
 ```bash
 python setup_bpe_fast.py build_ext --inplace
+```
+
+For the parallel trainer, use:
+
+```bash
+python setup_bpe_fast_parallel.py build_ext --inplace
 ```
 
 Then run the corresponding trainer again.
@@ -286,6 +313,7 @@ Recompilation is mainly needed after changing files such as:
 setup_bpe_fast.py
 setup_bpe_fast_parallel.py
 ```
+
 ---
 
 ## 8. Common Problems
@@ -300,7 +328,7 @@ Run:
 python setup_bpe_fast.py build_ext --inplace
 ```
 
-Then run the trainer.
+Then run the trainer again.
 
 ---
 
@@ -320,7 +348,7 @@ pip install cython
 
 ---
 
-### Problem: PyCharm uses the wrong Python environment
+### Problem: PyCharm Uses the Wrong Python Environment
 
 Make sure PyCharm uses the project virtual environment:
 
@@ -342,7 +370,7 @@ pip install -r requirements.txt
 
 ---
 
-### Problem: PowerShell blocks virtual environment activation
+### Problem: PowerShell Blocks Virtual Environment Activation
 
 If PowerShell does not allow activation, you may see an execution policy error.
 
@@ -381,4 +409,11 @@ python setup_bpe_fast.py build_ext --inplace
 python PrunedBPETrainerCython.py
 ```
 
-For the parallel trainer, change the commands above accordingly.
+The Visual Studio Build Tools path may vary depending on the installed Visual Studio version and installation location.
+
+For the parallel trainer, replace the final two commands with:
+
+```bash
+python setup_bpe_fast_parallel.py build_ext --inplace
+python PrunedBPETrainerCythonParallel.py
+```
